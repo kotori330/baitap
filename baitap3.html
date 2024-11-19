@@ -1,160 +1,146 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Learn Coding">
-        <link rel="stylesheet" href="baitap3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    </head>
-    <body>
-        <div class="main">
-            <div class="header">
-                <nav class="nav-bar">
-                    <div class="logo">
-                        <img src="https://user-images.githubusercontent.com/29374426/175779753-dfd1511a-0cf5-4599-a4b6-ca46a57bd552.png"
-                        alt = "KungFu Tech" class="logo-img">
-                        <button class="dropdown">
-                            Khóa học<i class="arrow down"></i>
-                            <div class="dropdown-content">
-                                <p>Khóa học Javascript</p>
-                                <p>Khóa học Java</p>
-                                <p>Khóa học Angular</p>
-                            </div>
-                        </button>
-                        <button>
-                            Phỏng vấn
-                        </button>
-                        <button>
-                            Posts
-                        </button>
-                        <button>
-                            5K
-                        </button>
-                        <button>
-                            ...
-                        </button>
-                    </div>
-                    <div class="search-bar">
-                        <input type="text" id="search" placeholder="Tìm kiếm">
-                        <button class="dangnhap">
-                            Đăng nhập
-                        </button>
-                        <button class="dangky">
-                            Đăng ký
-                        </button>
-                        <button class="setting">
-                            <i class="material-icons">computer</i>
-                        </button>
-                    </div>
-                </nav>
-            </div>
-            <div class="divider"></div>
-            <div class="body">
-                <div class="slideshow">
-                    <div class="heading-1">
-                        <h2>Nền tảng học lập trình hàng đầu Việt Nam</h2>
-                    </div>
-                    <div class="description-1">
-                        <p>Làm chủ các khóa học dành cho người mới bắt đầu và những bạn mất gốc...</p>
-                    </div>
-                    <div>
-                        <button>
-                            Khám phá ngay <i class="arrow right"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="article">
-                    <div class="heading-2">
-                        <h1>Khóa học <span>phổ biến</span></h1>
-                        <button>
-                            Xem thêm <i class="arrow right"></i>
-                        </button>
-                    </div>
-                    <div class="list-article">
-                        <div class="item-1">
-                            <img src="https://cdn.bap-software.net/2024/01/03211643/How-is-AI-applied-to-Java-programming-e1704266486769.jpg"
-                            alt="java" class="article-img">
-                            <div class="heading-3">
-                                <p>
-                                    <h3>Khoá học Java từ cơ bản đến nâng cao</h3>
-                                </p>
-                            </div>
-                            <div class="description-2">
-                                Java là một trong những ngôn ngữ lập trình hướng đối tượng. Nó được sử dụng trong phát...
-                            </div>
-                            <div class="register">
-                                <p class="free">
-                                    Miễn phí
-                                </p>
-                                <button>
-                                    Vào học
-                                </button>
-                            </div>
-                        </div>
-                        <div class="item-1">
-                            <img src="https://wiki.matbao.net/wp-content/uploads/2019/09/javascript-la-gi.jpg"
-                            alt="javascript" class="article-img">
-                            <div class="heading-3">
-                                <p>
-                                    <h3>Khoá học Javascript từ cơ bản đến nâng cao</h3>
-                                </p>
-                            </div>
-                            <div class="description-2">
-                                Javascript là ngôn ngữ lập trình kịch bản (scripting language) cho client-side, sau này còn cho...
-                            </div>
-                            <div class="register">
-                                <p class="free">
-                                    Miễn phí
-                                </p>
-                                <button>
-                                    Vào học
-                                </button>
-                            </div>
-                        </div>
-                        <div class="item-1">
-                            <img src="https://thuanbui.me/wp-content/uploads/2021/08/react-js.png"
-                            alt="reactjs" class="article-img">
-                            <div class="heading-3">
-                                <p>
-                                    <h3>Khoá học Reactjs từ cơ bản đến nâng cao</h3>
-                                </p>
-                            </div>
-                            <div class="description-2">
-                                ReactJS là một thư viện JavaScript phổ biến và mạnh mẽ được phát triển bởi...
-                            </div>
-                            <div class="register">
-                                <p class="free">
-                                    Miễn phí
-                                </p>
-                                <button>
-                                    Vào học
-                                </button>
-                            </div>
-                        </div>
-                        <div class="item-1">
-                            <img src="https://topviecit.vn/blog/wp-content/uploads/2022/07/ngon-ngu-lap-trinh-C-la-gi-topcv.jpg"
-                            alt="C++" class="article-img">
-                            <div class="heading-3">
-                                <p>
-                                    <h3>Khoá học C++ từ cơ bản đến nâng cao</h3>
-                                </p>
-                            </div>
-                            <div class="description-2">
-                                C++ là một trong những ngôn ngữ lập trình hướng đối tượng. Nó được sử dụng trong phát...
-                            </div>
-                            <div class="register">
-                                <p class="free">
-                                    Miễn phí
-                                </p>
-                                <button>
-                                    Vào học
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Learn Coding" />
+    <link rel="stylesheet" href="baitap3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="header">
+        <nav class="nav-bar">
+          <div class="logo">
+            <img
+              src="https://user-images.githubusercontent.com/29374426/175779753-dfd1511a-0cf5-4599-a4b6-ca46a57bd552.png"
+              alt="KungFu Tech"
+              class="logo-img"
+            />
+            <button class="dropdown">
+              Khóa học<i class="arrow down"></i>
+              <div class="dropdown-content">
+                <p>Khóa học Javascript</p>
+                <p>Khóa học Java</p>
+                <p>Khóa học Angular</p>
+              </div>
+            </button>
+            <button>Phỏng vấn</button>
+            <button>Posts</button>
+            <button>5K</button>
+            <button>...</button>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="search" placeholder="Tìm kiếm" />
+            <button class="dangnhap">Đăng nhập</button>
+            <button class="dangky">Đăng ký</button>
+            <button class="setting">
+              <i class="material-icons">computer</i>
+            </button>
+          </div>
+        </nav>
+      </div>
+      <div class="divider"></div>
+      <div class="body">
+        <div class="slideshow">
+          <div class="heading-1">
+            <h2>Nền tảng học lập trình hàng đầu Việt Nam</h2>
+          </div>
+          <div class="description-1">
+            <p>
+              Làm chủ các khóa học dành cho người mới bắt đầu và những bạn mất
+              gốc...
+            </p>
+          </div>
+          <div>
+            <button>Khám phá ngay <i class="arrow right"></i></button>
+          </div>
         </div>
-    </body>
+        <div class="article">
+          <div class="heading-2">
+            <h1>Khóa học <span>phổ biến</span></h1>
+            <button>Xem thêm <i class="arrow right"></i></button>
+          </div>
+          <div class="list-article">
+            <div class="item-1">
+              <img
+                src="https://cdn.bap-software.net/2024/01/03211643/How-is-AI-applied-to-Java-programming-e1704266486769.jpg"
+                alt="java"
+                class="article-img"
+              />
+              <div class="heading-3">
+                <h3>Khoá học Java từ cơ bản đến nâng cao</h3>
+              </div>
+              <div class="description-2">
+                Java là một trong những ngôn ngữ lập trình hướng đối tượng. Nó
+                được sử dụng trong phát...
+              </div>
+              <div class="register">
+                <p class="free">Miễn phí</p>
+                <button>Vào học</button>
+              </div>
+            </div>
+            <div class="item-1">
+              <img
+                src="https://wiki.matbao.net/wp-content/uploads/2019/09/javascript-la-gi.jpg"
+                alt="javascript"
+                class="article-img"
+              />
+              <div class="heading-3">
+                <h3>Khoá học Javascript từ cơ bản đến nâng cao</h3>
+              </div>
+              <div class="description-2">
+                Javascript là ngôn ngữ lập trình kịch bản (scripting language)
+                cho client-side, sau này còn cho...
+              </div>
+              <div class="register">
+                <p class="free">Miễn phí</p>
+                <button>Vào học</button>
+              </div>
+            </div>
+            <div class="item-1">
+              <img
+                src="https://thuanbui.me/wp-content/uploads/2021/08/react-js.png"
+                alt="reactjs"
+                class="article-img"
+              />
+              <div class="heading-3">
+                <h3>Khoá học Reactjs từ cơ bản đến nâng cao</h3>
+              </div>
+              <div class="description-2">
+                ReactJS là một thư viện JavaScript phổ biến và mạnh mẽ được phát
+                triển bởi...
+              </div>
+              <div class="register">
+                <p class="free">Miễn phí</p>
+                <button>Vào học</button>
+              </div>
+            </div>
+            <div class="item-1">
+              <img
+                src="https://topviecit.vn/blog/wp-content/uploads/2022/07/ngon-ngu-lap-trinh-C-la-gi-topcv.jpg"
+                alt="C++"
+                class="article-img"
+              />
+              <div class="heading-3">
+                <h3>Khoá học C++ từ cơ bản đến nâng cao</h3>
+              </div>
+              <div class="description-2">
+                C++ là một trong những ngôn ngữ lập trình hướng đối tượng. Nó
+                được sử dụng trong phát...
+              </div>
+              <div class="register">
+                <p class="free">Miễn phí</p>
+                <button>Vào học</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

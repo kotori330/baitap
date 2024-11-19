@@ -1,4 +1,16 @@
 
+/*
+
+Primary color #1:
+Primary color #2: 
+Primary color #3: 
+Primary color #4: 
+Primary color #5: 
+Primary color #6: 
+Secondary color: 
+
+*/
+
 *,
 *::before,
 *::after {
@@ -108,6 +120,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
+    color: black;
     top: 51px;
     z-index: 1;
 }
