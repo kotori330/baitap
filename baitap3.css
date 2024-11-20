@@ -18,41 +18,27 @@ Secondary color:
   margin: 0;
 }
 
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
 body {
   background-color: rgb(244, 246, 248);
+}
+
+.body {
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 1200px; /* responsive padding */
-  padding: 0 20 0 20;
+  max-width: 120rem; /* responsive padding */
+  padding: 0 2rem 0 2rem;
   margin: 0 auto;
-}
-
-.divider {
-  border-bottom: 1px solid grey;
-}
-
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-
-.right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  margin-left: 10px;
+  font-size: 1.6rem; /* =16px (browser default */
 }
 
 /* Nav bar */
 
 .logo > img {
-  width: 200px;
-  height: 40px;
+  width: 20rem;
+  height: 4rem;
 }
 
 .logo > img:hover,
@@ -60,32 +46,18 @@ body {
   cursor: pointer;
 }
 
-.nav-bar {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
-}
-
-.nav-bar button {
-  font-weight: bold;
-}
-
-.nav-bar button,
-input {
-  border: none;
-  padding: 7px 10px;
-  margin: 0 5px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.nav-bar input {
-  border: 1px solid;
-}
-
 .logo button {
   background-color: rgb(209, 245, 245);
   color: rgb(39, 175, 141);
+}
+
+.logo button:hover {
+  background-color: aqua;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
 }
 
 .pro-text {
@@ -96,13 +68,48 @@ input {
   background-color: #d946ef;
   color: white;
   font-weight: bold;
-  font-size: 14px;
-  border-radius: 6px;
-  padding: 1px 5px;
+  font-size: 1.4rem;
+  border-radius: 0.6rem;
+  padding: 0.1rem 0.5rem;
 
   position: absolute;
-  top: -26px;
-  right: -4px;
+  top: -2.6rem;
+  right: -0.4rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(244, 246, 248);
+  border-bottom: 0.1rem solid grey;
+  padding-bottom: 5rem;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  max-width: 120rem;
+  padding-top: 0.7rem;
+}
+
+.nav-bar button {
+  font-weight: bold;
+}
+
+.nav-bar button,
+input {
+  border: none;
+  padding: 0.7rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.nav-bar input {
+  border: 0.1rem solid;
 }
 
 .dangnhap {
@@ -116,7 +123,7 @@ input {
 
 .dangky {
   background-color: transparent;
-  border: 1px solid !important;
+  border: 0.1rem solid !important;
   border-color: rgb(0, 172, 129);
   color: rgb(0, 172, 129);
 }
@@ -129,70 +136,126 @@ input {
   background-color: rgb(209, 229, 247);
 }
 
-.logo button:hover {
-  background-color: aqua;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
   color: black;
-  top: 51px;
+  top: 5.1rem;
   z-index: 1;
 }
 
 .dropdown-content p:hover {
   background-color: rgb(206, 206, 206);
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .dropdown:hover .dropdown-content {
   background-color: rgb(247, 247, 247);
   display: block;
   text-align: left;
-  padding: 5px 5px;
-  border-radius: 5px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .search-bar {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
+  /* margin-right: 32rem; */
 }
 
 /* Slideshow */
 
-.slideshow {
-  background-color: rgb(177, 247, 220);
-  padding: 40px 20px;
-  margin: 20px 0;
-  border-radius: 7px;
-}
-
 .heading-1,
 .description-1 {
-  padding-bottom: 20px;
+  padding-bottom: 2rem;
 }
 
-.slideshow button {
+.slideshow-slide-1, .slideshow-slide-2, .slideshow-slide-3 {
+  padding: 4rem 2rem;
+  margin: 2rem 0;
+  border-radius: 0.7rem;
+}
+
+.slideshow-slide-1 {
+  background-color: rgb(232, 248, 246);
+}
+
+.slideshow-slide-2 {
+  background-color:rgb(255, 227, 255);
+}
+
+.slideshow-slide-3 {
+  background-color: rgb(255, 229, 220);
+}
+
+.slideshow-slide-1 button {
   background-color: transparent;
   color: rgb(0, 112, 69);
   border-color: rgb(0, 112, 69);
-  padding: 7px;
-  border-radius: 7px;
+  padding: 0.7rem;
+  border-radius: 0.7rem;
 }
 
-.slideshow button:hover {
-  background-color: rgb(232, 248, 246);
+.slideshow-slide-2 button {
+  background-color: transparent;
+  color: rgb(255, 25, 255);
+  border-color: rgb(255, 25, 255);
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+}
+
+.slideshow-slide-3 button {
+  background-color: transparent;
+  color: rgb(255, 25, 1);
+  border-color: rgb(255, 25, 1);
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+}
+}
+
+.slideshow-slide-1 button:hover {
+  background-color: rgb(110, 255, 246);
   cursor: pointer;
 }
 
-.slideshow .arrow {
-  color: rgb(0, 207, 128);
+.slideshow-slide-2 button:hover {
+  background-color: rgb(126, 1, 166);
   cursor: pointer;
+}
+
+.slideshow-slide-3 button:hover {
+  background-color: rgb(255, 156, 112);
+  cursor: pointer;
+}
+
+.slideshow {
+  display: flex;
+  overflow-x: scroll;
+  counter-reset: item;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: hidden;
+}
+
+.slideshow-container {
+  display: flex;
+  animation: slide 12s infinite; /* 12s to complete a cycle */
+}
+
+.slideshow-slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(0); }
+  25% { transform: translateX(-100%); }  /* to slide 2 */
+  45% { transform: translateX(-100%); }
+  50% { transform: translateX(-200%); } /* to slide 3 */
+  70% { transform: translateX(-200%); }
+  75% { transform: translateX(0); }   /* bac to slide 1 */
+  100% { transform: translateX(0); }
 }
 
 /* Articles */
@@ -200,14 +263,14 @@ input {
 .heading-2 {
   display: flex;
   justify-content: space-between;
-  margin: 40px 0;
+  margin: 4rem 0;
 }
 
 .list-article {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  border-radius: 10px;
-  gap: 20px;
+  border-radius: 1rem;
+  gap: 2rem;
 }
 
 .heading-2 button {
@@ -215,9 +278,9 @@ input {
   background-color: rgb(183, 252, 252);
   color: rgb(29, 153, 122);
   font-weight: bold;
-  padding: 0 10px;
-  font-size: 14px;
-  border-radius: 7px;
+  padding: 0 1rem;
+  font-size: 1.4rem;
+  border-radius: 0.7rem;
 }
 
 .heading-2 button:hover {
@@ -228,41 +291,40 @@ input {
 
 .item-1 > img {
   width: 100%;
-  height: 200px;
+  height: 20rem;
   object-fit: scale-down;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
+  border-top-left-radius: 1.4rem;
+  border-top-right-radius: 1.4rem;
 }
 
 .item-1 {
-  background-color: #ffffff;
+  background-color: #fdfdfd;
   height: auto;
   width: 100%;
-  border-radius: 14px;
+  border-radius: 1.4rem;
 
-  display: relative;
+
 }
 
 .learner img {
-  width: 20px;
-  height: 20px;
-  margin-inline-end: -5px;
+  width: 2rem;
+  height: 2rem;
+  margin-inline-end: -0.5rem;
 }
 
 .learner p {
-  display: inline;
-  padding-left: 20px;
+  display: inline-flex;
+  padding-left: 2rem;
 }
 
 .learner {
   background-color: #f9fafb;
-  margin: 0 50px;
-  margin-top: -28px;
-  padding: 10px;
-  border-radius: 100px;
+  margin: -2.1rem 3rem 0 4rem;
+  padding: 0.8rem;
+  border-radius: 10rem;
 
   position: absolute;
-  left: 310px;
+  display: flex;
 }
 
 .article-img-1,
@@ -286,22 +348,20 @@ input {
 .register,
 .description-2,
 .heading-3 {
-  margin: 0 20px;
+  margin: 0 2rem;
 }
 
-.free {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  color: rgb(231, 100, 122);
+.register {
+  padding: 1rem 0;
 }
+
 
 .register button {
   border: none;
   background-color: rgb(0, 199, 199);
   color: white;
-  padding: 7px 7px;
-  border-radius: 5px;
+  padding: 0.7rem 0.7rem;
+  border-radius: 0.5rem;
 }
 
 .register button:hover {
@@ -311,12 +371,16 @@ input {
 
 .heading-3 {
   color: rgb(0, 63, 39);
-  padding-top: 50px;
-  margin-bottom: 30px;
+  padding-top: 3rem;
+  margin-bottom: 2rem;
 }
 
-.register {
-  padding-bottom: 10px;
+
+.free {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: rgb(231, 100, 122);
 }
 
 span {
@@ -325,15 +389,24 @@ span {
 
 /* Responsive */
 
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 68rem) {
   .logo button {
     display: none;
   }
+  .pro {
+    display: none;
+  }
+  .slideshow {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 50rem) {
   .list-article {
     display: grid;
     grid-template-columns: auto auto;
   }
-  .slideshow {
-    text-align: center;
+  .search-bar input {
+    display: none;
   }
 }
