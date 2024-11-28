@@ -3,8 +3,9 @@
   <head>
     <script>
       function maxLengthCheck(object) {
+        // đặt 1 parameter "object"
         if (object.value.length > object.max.length) {
-          object.value = object.value.slice(0, object.max.length);
+          object.value = object.value.slice(0, object.max.length); //slice (0,1)
         }
       }
       function println() {
@@ -51,7 +52,7 @@
         oninput="maxLengthCheck(this)"
       />
       <input type="button" onclick="println()" value="Submit" />
-      <!--type="submit" trigger a form reset-->
+      <!--type="submit" trigger a form reset/page refresh-->
     </form>
     <p id="print"></p>
   </body>
