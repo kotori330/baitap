@@ -1,107 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    <script>
+      function maxLengthCheck(object) {
+        if (object.value.length > object.max.length) {
+          object.value = object.value.slice(0, object.max.length);
+        }
       }
+      function println() {
+        let x = document.getElementById("input").value;
+        document.getElementById("print").innerHTML = "";
+        // for (let i = 1; i < 10; i++) {
+        //   document.write("<p>The result of " + x + " multiple by " + i + " is " + x*i + "</p>");
+        // }
 
-      .slideshow {
-        display: flex;
-        overflow: hidden; /* Hide overflow */
-        width: 100%; /* Ensure full width */
-        position: relative; /* Position relative for absolute children */
-      }
-
-      .slideshow-container {
-        display: flex;
-        animation: slide 12s infinite; /* Auto transition every 12 seconds */
-      }
-
-      .slideshow-slide {
-        flex: 0 0 100%; /* Each slide takes full width */
-        scroll-snap-align: start; /* Aligns slides for snapping */
-        position: relative;
-      }
-
-      @keyframes slide {
-        0% {
-          transform: translateX(0);
+        /* if (x == "") {
+          const para = document.createElement("p");
+          document.body.appendChild(para);
+          para.innerHTML = "You must enter a value!";
+        } else {
+          for (let i = 1; i < 10; i++) {
+            const para = document.createElement("p");
+            document.body.appendChild(para);
+            para.innerHTML =
+              x + " * " + i + " = " + x * i;
+          }
         }
-        20% {
-          transform: translateX(0);
-        }
-        25% {
-          transform: translateX(-100%);
-        }
-        45% {
-          transform: translateX(-100%);
-        }
-        50% {
-          transform: translateX(-200%);
-        }
-        70% {
-          transform: translateX(-200%);
-        }
-        75% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(0);
+ */
+        if (x == "") {
+          document.getElementById("print").innerHTML =
+            "You must enter a value!";
+        } else {
+          for (let i = 1; i < 11; i++) {
+            document.getElementById("print").innerHTML +=
+              x + " * " + i + " = " + x * i + "<br>"; // giá trị i+1 sẽ = i + "đoạn code mới" -> Không đè nhau
+          }
         }
       }
-    </style>
-    <title>CSS Only Auto-Transition Carousel</title>
+    </script>
   </head>
   <body>
-    <div class="slideshow">
-      <div class="slideshow-container">
-        <div class="slideshow-slide">
-          <div class="slideshow-slide-1">
-            <div class="heading-1">
-              <h2>Nền tảng học lập trình hàng đầu Việt Nam</h2>
-            </div>
-            <div class="description-1">
-              <p>
-                Làm chủ các khóa học dành cho người mới bắt đầu và những bạn mất
-                gốc...
-              </p>
-            </div>
-            <div>
-              <button>
-                Khám phá ngay <i class="fa-solid fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="slideshow-slide">
-          <div class="slideshow-slide-2">
-            <div class="heading-1">
-              <h2>Bí quyết thành công trong cuộc phỏng vấn lập trình</h2>
-            </div>
-            <div class="description-1">
-              <p>
-                Hơn 6000 câu hỏi phỏng vấn Full-Stack, Coding & System Design
-                Interview giúp bạn sẵn sàng cho cuộc phỏng vấn lập trình.
-              </p>
-            </div>
-            <div>
-              <button>
-                Khám phá ngay <i class="fa-solid fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1>In ra bảng cửu chương</h1>
+    <form>
+      <input
+        id="input"
+        type="number"
+        onfocus="this.value=''"
+        min="1"
+        max="9"
+        oninput="maxLengthCheck(this)"
+      />
+      <input type="button" onclick="println()" value="Submit" />
+      <!--type="submit" trigger a form reset-->
+    </form>
+    <p id="print"></p>
   </body>
 </html>
