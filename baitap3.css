@@ -226,15 +226,27 @@ input {
 }
 
 .slideshow-slide-1 {
-  background-color: rgb(232, 248, 246);
+  background-image: linear-gradient(
+    to right,
+    rgb(189, 248, 246, 1),
+    rgb(232, 248, 246, 0)
+  );
 }
 
 .slideshow-slide-2 {
-  background-color: rgb(255, 227, 255);
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 199, 255, 1),
+    rgb(255, 167, 255, 0)
+  );
 }
 
 .slideshow-slide-3 {
-  background-color: rgb(255, 229, 220);
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 229, 220, 1),
+    rgb(255, 229, 220, 0)
+  );
 }
 
 .slideshow-slide-1 button {
