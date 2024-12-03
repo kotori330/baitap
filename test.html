@@ -1,45 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script>
-      function maxLengthCheck(object) {
-        // đặt 1 parameter "object"
-        if (object.value.length > object.max.length) {
-          object.value = object.value.slice(0, object.max.length); //slice (0,1)
-        }
-      }
-      function println() {
-        let x = document.getElementById("input").value;
-        document.getElementById("print").innerHTML = "";
-        // for (let i = 1; i < 10; i++) {
-        //   document.write("<p>The result of " + x + " multiple by " + i + " is " + x*i + "</p>");
-        // }
-
-        /* if (x == "") {
-          const para = document.createElement("p");
-          document.body.appendChild(para);
-          para.innerHTML = "You must enter a value!";
-        } else {
-          for (let i = 1; i < 10; i++) {
-            const para = document.createElement("p");
-            document.body.appendChild(para);
-            para.innerHTML =
-              x + " * " + i + " = " + x * i;
-          }
-        }
- */
-        if (x == "") {
-          document.getElementById("print").innerHTML =
-            "You must enter a value!";
-        } else {
-          for (let i = 1; i < 11; i++) {
-            document.getElementById("print").innerHTML +=
-              x + " * " + i + " = " + x * i + "<br>"; // giá trị i+1 sẽ = i + "đoạn code mới" -> Không đè nhau
-          }
-        }
-      }
-    </script>
-  </head>
+  <head> </head>
   <body>
     <h1>In ra bảng cửu chương</h1>
     <form>
@@ -52,8 +13,61 @@
         oninput="maxLengthCheck(this)"
       />
       <input type="button" onclick="println()" value="Submit" />
+      <input class="clear-btn" type="button" value="" />
       <!--type="submit" trigger a form reset/page refresh-->
     </form>
     <p id="print"></p>
   </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkMaxLength = (obj) => {
+        if (obj.value.length > obj.max.length) {
+          obj.value = obj.value.slice(0, obj.max.length); //slice (0,1)
+        }
+      };
+      const inputElement = document.querySelector("#input");
+
+      inputElement.addEventListener("input", checkMaxLength);
+
+      // print
+      const printMultiTable = () => {
+        const x = document.querySelector("#input").value;
+        const printElement = document.getElementById("print");
+        printElement.textContent = "";
+      };
+
+      // clear
+      const clearMultiTable = () => {};
+    });
+
+    function println() {
+      // for (let i = 1; i < 10; i++) {
+      //   document.write("<p>The result of " + x + " multiple by " + i + " is " + x*i + "</p>");
+      // }
+
+      /* if (x == "") {
+        const para = document.createElement("p");
+        document.body.appendChild(para);
+        para.innerHTML = "You must enter a value!";
+      } else {
+        for (let i = 1; i < 10; i++) {
+          const para = document.createElement("p");
+          document.body.appendChild(para);
+          para.innerHTML =
+            x + " * " + i + " = " + x * i;
+        }
+      }
+*/
+      if (x == "") {
+        document.getElementById("print").textContent =
+          "You must enter a value!";
+      } else {
+        for (let i = 1; i < 11; i++) {
+          document.getElementById("print").textContent +=
+            x + " * " + i + " = " + x * i + "\n"; // giá trị i+1 sẽ = i + "đoạn code mới" -> Không đè nhau
+          document.insertBefore;
+        }
+      }
+    }
+  </script>
 </html>
