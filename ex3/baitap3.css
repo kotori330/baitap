@@ -19,7 +19,7 @@ Secondary color:
 }
 
 html {
-  font-size: 62.5%; /* 1rem = 10px */
+  font-size: 62.5%; /* only for normal user whose browser's font size sticks with default - 16pt */
 }
 
 body {
@@ -350,9 +350,10 @@ input {
 }
 
 .list-article {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
   border-radius: 1rem;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
 
@@ -372,9 +373,9 @@ input {
   cursor: pointer;
 }
 
-.item-1 > img {
+[class^='article-img'] {
   width: 100%;
-  height: 20rem;
+  height: auto;
   object-fit: scale-down;
   border-top-left-radius: 1.4rem;
   border-top-right-radius: 1.4rem;
@@ -382,9 +383,13 @@ input {
 
 .item-1 {
   background-color: #fdfdfd;
-  height: auto;
   width: 100%;
+  height: auto;
   border-radius: 1.4rem;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .learner img {
@@ -490,10 +495,16 @@ input {
 
 @media only screen and (max-width: 50rem) {
   .list-article {
-    display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(2, 1fr);
   }
+
   .search-bar input {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 30rem) {
+  .list-article {
+    grid-template-columns: 1fr;
   }
 }
