@@ -38,37 +38,37 @@
     </div>
   </body>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
       // define function first
       const checkMaxLength = (obj) => {
         if (obj.value.length > obj.max.length) {
           obj.value = obj.value.slice(0, obj.max.length); //slice (0,1)
         }
       };
-      const inputElement = document.getElementById('input');
+      const inputElement = document.getElementById("input");
       // register function later
-      inputElement.addEventListener('input', (e) => {
+      inputElement.addEventListener("input", (e) => {
         checkMaxLength(e.target);
       });
 
       // client-side validation
-      inputElement.addEventListener('keydown', (e) => {
+      inputElement.addEventListener("keydown", (e) => {
         const allowedKeys = [
-          '0',
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9', // numbers
-          'Backspace',
-          'Delete',
-          'ArrowLeft',
-          'ArrowRight',
-          'Tab', // control keys
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9", // numbers
+          "Backspace",
+          "Delete",
+          "ArrowLeft",
+          "ArrowRight",
+          "Tab", // control keys
         ];
 
         if (!allowedKeys.includes(e.key)) {
@@ -77,26 +77,27 @@
       });
 
       // print multiplication table
-      const printElement = document.querySelector('#print');
-      const printButton = document.querySelector('.btn-print');
+      const printElement = document.querySelector("#print");
+      const printButton = document.querySelector(".btn-print");
 
       // define and register at the same time
-      printButton.addEventListener('click', (e) => {
+      printButton.addEventListener("click", (e) => {
         // unary operator
-        // don't have to check if it's a numerical string
+        // don't have to check if it's a numerical string / convert string to number
         const value = +inputElement.value;
-        // First, create an array with 10 undefined elements
-        // Second, output an array-like obj consists of the keys of the array, which are its indexes
-        // Finally, using spread operator to convert array-like to array, therefore `reduce()` can be used
+        // First, create an array object with 10 undefined elements (10 slots, all empty)
+        // Second, output an array-like obj consists of the keys of the array, which are its indexes {0,1,2,3...}
+        // Finally, using spread operator to convert array-like to array [0,1,2,3...], therefore `reduce()` can be used
+        // This is modern loop: [Array Iteration]
         printElement.textContent = [...Array(10).keys()].reduce(
           (prev, current, idx) => {
             return (
               prev +
               `${current} x ${value} = ${current * value}` +
-              `${idx === 9 ? '' : '\r\n'}`
+              `${idx === 9 ? "" : "\r\n"}`
             );
           },
-          ''
+          ""
         );
       });
       /* 
@@ -115,12 +116,12 @@
 
       // clear multiplication table
       // define and register at the same time
-      const clearButton = document.getElementsByClassName('btn-clear');
-      clearButton[0].addEventListener('click', (e) => {
-        printElement.textContent = '';
+      const clearButton = document.getElementsByClassName("btn-clear");
+      clearButton[0].addEventListener("click", (e) => {
+        printElement.textContent = "";
       });
-      inputElement.addEventListener('focus', (e) => {
-        e.target.value = '';
+      inputElement.addEventListener("focus", (e) => {
+        e.target.value = "";
       });
     });
   </script>
