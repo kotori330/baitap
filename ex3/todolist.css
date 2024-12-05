@@ -1,0 +1,91 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 10rem 30rem;
+}
+
+.main {
+  background-color: red;
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+}
+
+h2 {
+  color: white;
+  font-size: 4rem;
+}
+
+.add-input {
+  width: 100rem;
+  font-size: 4rem;
+  border: none;
+}
+
+.add-btn {
+  font-size: 4rem;
+  background-color: rgb(204, 204, 204);
+  padding: 0 3rem;
+  border: none;
+}
+
+.add-btn:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.display-list {
+  font-size: 2rem;
+}
+
+.del-btn:hover {
+  background-color: red;
+}
+
+.fa-x {
+  font-size: 2rem;
+}
+
+li {
+  list-style-type: none;
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+li:hover {
+  background-color: gray;
+}
+
+li:nth-child(even) {
+  background-color: rgb(226, 226, 226);
+}
+
+span {
+  margin-left: 4rem;
+}
+
+.completed {
+  text-decoration: line-through;
+  background-color: rgb(150, 150, 150);
+}
+
+.fa-check {
+  visibility: hidden;
+  margin-right: 0.5rem;
+}
+
+.visible {
+  visibility: visible;
+}
