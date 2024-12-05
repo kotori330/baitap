@@ -64,10 +64,12 @@ li {
   justify-content: space-between;
 }
 
-li:hover {
+li:hover,
+li:nth-child(even):hover {
   background-color: gray;
 }
 
+/* CSS Pseudo Classes priority is higher than normal CSS selectors */
 li:nth-child(even) {
   background-color: rgb(226, 226, 226);
 }
