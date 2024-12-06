@@ -18,6 +18,7 @@ body {
   font-size: 1.6rem; /* =16px (browser default */
 }
 
+/* main part */
 .calculator {
   padding: 0.7rem;
   border: 0.01rem solid #e3e3e3;
