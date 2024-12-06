@@ -43,11 +43,12 @@ const display = document.querySelector(".display-field");
     newItem.innerText = `${item.value}`;
     display.appendChild(newItem);
 
-    const value = document.querySelectorAll(`._${item.value}`);
+    const value = document.querySelectorAll(`.${item.classList}`);
+    const calValue = Array.from(value).map(
+      (node) => parseFloat(node.innerText)
 
-    const calValue = Array.from(value).map((node) => {
-      parseFloat(node.innerText);
-    });
+      // ;
+    );
     // for (const e of newItem) {
 
     //   e += `${item.value}`;
