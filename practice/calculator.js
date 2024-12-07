@@ -20,6 +20,9 @@ const delBtn = document.querySelector(".del-btn");
 
 //display
 const display = document.querySelector(".display-field");
+
+//declare
+const calValue = [];
 [
   plusBtn,
   minusBtn,
@@ -39,29 +42,33 @@ const display = document.querySelector(".display-field");
 ].forEach((item) => {
   item.addEventListener("click", () => {
     const newItem = document.createElement("span");
-    newItem.classList.add(`_${item.value}`);
+    // newItem.classList.add(`_${item.value}`);
     newItem.innerText = `${item.value}`;
     display.appendChild(newItem);
 
-    const value = document.querySelectorAll(`.${item.classList}`);
-    const calValue = Array.from(value).map(
-      (node) => parseFloat(node.innerText)
+    calValue.push(item.value);
 
-      // ;
-    );
+    // console.log(calValue);
+
+    // const value = document.querySelectorAll(`.${item.classList}`);
+
+    // const calValue = Array.from(item.value).map(
+    //   (node) => parseFloat(node.innerText)
+    // );
     // for (const e of newItem) {
-
     //   e += `${item.value}`;
     //   return Number(e);
     // }
-
-    // equalBtn.addEventListener("click",  () => {
-    //   return e;
-    // })
-    console.log(calValue);
   });
 });
 
 delBtn.addEventListener("click", () => {
   display.removeChild(display.lastChild);
+  calValue.pop();
+});
+
+equalBtn.addEventListener("click", () => {
+  const result = parseFloat(calValue);
+  console.log(result);
+  return result;
 });
