@@ -85,7 +85,7 @@
         // unary operator
         // don't have to check if it's a numerical string / convert string to number
         const value = +inputElement.value;
-        // First, create an array object with 10 undefined elements (10 slots, all empty)
+        // First, create an array object (in this case, it's a NodeList cuz of the querySelector for printElement) with 10 undefined elements (10 slots, all empty)
         // Second, output an array-like obj consists of the keys of the array, which are its indexes {0,1,2,3...}
         // Finally, using spread operator to convert array-like to array [0,1,2,3...], therefore `reduce()` can be used
         // This is modern loop: [Array Iteration]
@@ -96,8 +96,7 @@
               `${current} x ${value} = ${current * value}` +
               `${idx === 9 ? "" : "\r\n"}`
             );
-          },
-          ""
+          }
         );
       });
       /* 

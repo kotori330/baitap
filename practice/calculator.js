@@ -22,7 +22,7 @@ const delBtn = document.querySelector(".del-btn");
 const display = document.querySelector(".display-field");
 
 //declare
-const calValue = [];
+let calValue = [];
 [
   plusBtn,
   minusBtn,
@@ -41,16 +41,18 @@ const calValue = [];
   dotBtn,
 ].forEach((item) => {
   item.addEventListener("click", () => {
+    calValue.push(item.value);
+    // console.log(calValue);
+
     const newItem = document.createElement("span");
     // newItem.classList.add(`_${item.value}`);
     newItem.innerText = `${item.value}`;
     display.appendChild(newItem);
 
-    calValue.push(item.value);
-
-    // console.log(calValue);
-
-    // const value = document.querySelectorAll(`.${item.classList}`);
+    if (display.innerText !== "") {
+      document.getElementById("_0").style.visibility = "hidden";
+    }
+    // // const value = document.querySelectorAll(`.${item.classList}`);
 
     // const calValue = Array.from(item.value).map(
     //   (node) => parseFloat(node.innerText)
@@ -63,12 +65,107 @@ const calValue = [];
 });
 
 delBtn.addEventListener("click", () => {
-  display.removeChild(display.lastChild);
-  calValue.pop();
+  if (display.innerText !== "0") {
+    display.removeChild(display.lastChild);
+    calValue.pop();
+    if (display.innerText !== "0") {
+      document.getElementById("_0").style.visibility = "visible";
+    }
+  }
 });
 
-equalBtn.addEventListener("click", () => {
-  const result = parseFloat(calValue);
-  console.log(result);
+const evaluateExpression = (expression) => {
+  let numbers = [];
+  let operators = [];
+  let currentNumber = "";
+  for (let char of expression) {
+    if (
+      char === "0" ||
+      char === "1" ||
+      char === "2" ||
+      char === "3" ||
+      char === "4" ||
+      char === "5" ||
+      char === "6" ||
+      char === "7" ||
+      char === "8" ||
+      char === "9"
+    ) {
+      currentNumber += char;
+    } else {
+      if (currentNumber) {
+        numbers.push(parseFloat(currentNumber));
+        currentNumber = "";
+      }
+      operators.push(char);
+    }
+  }
+  if (currentNumber) {
+    numbers.push(parseFloat(currentNumber));
+    currentNumber = "";
+  }
+
+  //calculate
+  let result = numbers[0];
+  // operators.forEach((item, index) => {
+  //   if (operators[index] === "+") {
+  //     result += numbers[index + 1]
+  //   } else if (operators[i] === "-") {
+  //   result -= numbers[i + 1];
+  // } else if (operators[i] === "×") {
+  //   result *= numbers[i + 1];
+  // } else if (operators[i] === "÷") {
+  //   result /= numbers[i + 1];
+  // });
+  // return result;
+
+  for (let i = 0; i < operators.length; i++) {
+    if (operators[i] === "+") {
+      result += numbers[i + 1];
+    } else if (operators[i] === "-") {
+      result -= numbers[i + 1];
+    } else if (operators[i] === "×") {
+      result *= numbers[i + 1];
+    } else if (operators[i] === "÷") {
+      if (numbers[i + 1] === "0") {
+        return "Division by zero is undefined!";
+      } else {
+        result /= numbers[i + 1];
+      }
+    }
+  }
+  console.log(numbers);
+  console.log(operators);
   return result;
+};
+
+equalBtn.addEventListener("click", () => {
+  // let result = "";
+  // calValue.forEach((item, index) => {
+  // if (Number.isInteger(item)) {
+  // if (Number.isInteger(calValue[calValue.indexOf(item) - 1])) {
+  // if (index > 0 && Number.isInteger(parseFloat(calValue[index - 1]))) {
+  // calValue.join("");
+  // result += item.toString();
+  // }
+  // if (item[index - 1] === ".") {
+  //   result += calValue.toString();
+  // }
+  // if (item[index - 1] === "+") {
+  //   result += calValue;
+  // } else if (item[index - 1] === "-") {
+  //   result -= calValue;
+  // } else if (item[index - 1] === "×") {
+  //   result *= calValue;
+  // } else if (item[index - 1] === "÷") {
+  //   result /= calValue;
+  // }
+  // }
+
+  // display.textContent = result;
+  // const expression = calValue.toString();
+  // const expression = calValue.join("");
+  // console.log(calValue);
+  // console.log(expression);
+  display.innerText = evaluateExpression(calValue);
 });
