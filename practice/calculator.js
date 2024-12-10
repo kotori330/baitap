@@ -42,36 +42,13 @@ let calValue = [];
 ].forEach((item) => {
   item.addEventListener("click", () => {
     calValue.push(item.value);
-    // console.log(calValue);
-
     const newItem = document.createElement("span");
-    // newItem.classList.add(`_${item.value}`);
     newItem.innerText = `${item.value}`;
     display.appendChild(newItem);
-
-    if (display.innerText !== "") {
-      document.getElementById("_0").style.visibility = "hidden";
-    }
-    // // const value = document.querySelectorAll(`.${item.classList}`);
-
-    // const calValue = Array.from(item.value).map(
-    //   (node) => parseFloat(node.innerText)
-    // );
-    // for (const e of newItem) {
-    //   e += `${item.value}`;
-    //   return Number(e);
+    // if (display.innerText !== "") {
+    //   document.getElementById("_0").style.visibility = "hidden";
     // }
   });
-});
-
-delBtn.addEventListener("click", () => {
-  if (display.innerText !== "0") {
-    display.removeChild(display.lastChild);
-    calValue.pop();
-    if (display.innerText !== "0") {
-      document.getElementById("_0").style.visibility = "visible";
-    }
-  }
 });
 
 const evaluateExpression = (expression) => {
@@ -80,16 +57,17 @@ const evaluateExpression = (expression) => {
   let currentNumber = "";
   for (let char of expression) {
     if (
-      char === "0" ||
-      char === "1" ||
-      char === "2" ||
-      char === "3" ||
-      char === "4" ||
-      char === "5" ||
-      char === "6" ||
-      char === "7" ||
-      char === "8" ||
-      char === "9"
+      "0123456789".includes(char)
+      // char === "0" ||
+      // char === "1" ||
+      // char === "2" ||
+      // char === "3" ||
+      // char === "4" ||
+      // char === "5" ||
+      // char === "6" ||
+      // char === "7" ||
+      // char === "8" ||
+      // char === "9"
     ) {
       currentNumber += char;
     } else {
@@ -105,7 +83,6 @@ const evaluateExpression = (expression) => {
     currentNumber = "";
   }
 
-  //calculate
   let result = numbers[0];
   // operators.forEach((item, index) => {
   //   if (operators[index] === "+") {
@@ -120,17 +97,38 @@ const evaluateExpression = (expression) => {
   // return result;
 
   for (let i = 0; i < operators.length; i++) {
-    if (operators[i] === "+") {
-      result += numbers[i + 1];
-    } else if (operators[i] === "-") {
-      result -= numbers[i + 1];
-    } else if (operators[i] === "×") {
-      result *= numbers[i + 1];
-    } else if (operators[i] === "÷") {
-      if (numbers[i + 1] === "0") {
-        return "Division by zero is undefined!";
-      } else {
-        result /= numbers[i + 1];
+    if (numbers.length === 1) {
+      return (result = numbers);
+    } else if (operators.length === 1 && numbers.length === 0) {
+      return "Error!";
+    } else if (operators.length >= numbers.length) {
+      result = 0;
+      if (operators[i] === "+") {
+        result += numbers[i + 1];
+      } else if (operators[i] === "-") {
+        result -= numbers[i + 1];
+      } else if (operators[i] === "×") {
+        result *= numbers[i + 1];
+      } else if (operators[i] === "÷") {
+        if (numbers[i + 1] === 0) {
+          return "Error!";
+        } else {
+          result /= numbers[i + 1];
+        }
+      }
+    } else {
+      if (operators[i] === "+") {
+        result += numbers[i + 1];
+      } else if (operators[i] === "-") {
+        result -= numbers[i + 1];
+      } else if (operators[i] === "×") {
+        result *= numbers[i + 1];
+      } else if (operators[i] === "÷") {
+        if (numbers[i + 1] === 0) {
+          return "Error!";
+        } else {
+          result /= numbers[i + 1];
+        }
       }
     }
   }
@@ -140,32 +138,18 @@ const evaluateExpression = (expression) => {
 };
 
 equalBtn.addEventListener("click", () => {
-  // let result = "";
-  // calValue.forEach((item, index) => {
-  // if (Number.isInteger(item)) {
-  // if (Number.isInteger(calValue[calValue.indexOf(item) - 1])) {
-  // if (index > 0 && Number.isInteger(parseFloat(calValue[index - 1]))) {
-  // calValue.join("");
-  // result += item.toString();
-  // }
-  // if (item[index - 1] === ".") {
-  //   result += calValue.toString();
-  // }
-  // if (item[index - 1] === "+") {
-  //   result += calValue;
-  // } else if (item[index - 1] === "-") {
-  //   result -= calValue;
-  // } else if (item[index - 1] === "×") {
-  //   result *= calValue;
-  // } else if (item[index - 1] === "÷") {
-  //   result /= calValue;
-  // }
-  // }
-
-  // display.textContent = result;
-  // const expression = calValue.toString();
-  // const expression = calValue.join("");
-  // console.log(calValue);
-  // console.log(expression);
-  display.innerText = evaluateExpression(calValue);
+  const expression = calValue.join(""); // Is it needed?
+  display.innerText = evaluateExpression(expression);
+  delBtn.addEventListener("click", () => {
+    calValue = [];
+  });
 });
+
+delBtn.addEventListener("click", () => {
+  display.removeChild(display.lastChild);
+  calValue.pop();
+});
+
+// minus value
+// decimal
+// error when too many operator simutaneously
