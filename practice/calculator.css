@@ -11,6 +11,7 @@ html {
 }
 
 body {
+  /* F2 to replace */
   font-family: Arial, Helvetica, sans-serif;
   max-width: 20rem; /* responsive padding */
   padding: 5.2rem 3.2rem;
@@ -37,19 +38,19 @@ body {
   overflow-x: scroll;
 }
 
-.btn {
+.keypad {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
   border: none;
 }
 
-.btn > *:hover {
+.keypad > *:hover {
   background-color: gray;
   cursor: pointer;
 }
 
-.btn > *:active {
+.keypad > *:active {
   transform: translateY(0.05rem);
 }
 
@@ -65,10 +66,7 @@ body {
   background-color: rgb(64, 140, 253);
 }
 
-.plus-btn,
-.minus-btn,
-.multi-btn,
-.divide-btn {
+.operator-btn {
   background-color: rgb(179, 179, 179);
 }
 
