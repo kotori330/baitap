@@ -111,22 +111,27 @@ const cleanUpOperators = () => {
 const evaluateExpression = (expression) => {
   try {
     const parts = expression.match(/(\d+\.?\d*|\.\d+|[+\-×÷])/g);
-    if (!parts || parts.length < 3) {
-      throw new Error("Invalid expression");
-    }
 
     let result = parseFloat(parts[0]);
+    if (!parts || parts.length < 3) {
+      if (parts.length === 1) {
+        result = parseFloat(parts[0]);
+      } else {
+        throw new Error("Invalid expression");
+      }
+    }
     let currentOperator = null;
 
-    for (let i = 1; i < parts.length; i++) {
+    for (let i = 0; i < parts.length; i++) {
       const part = parts[i];
-      if ("+-×÷".includes(part)) {
+      if ("+-×÷".includes(part) && !"0123456789".includes(part)) {
         currentOperator = part;
       } else {
         const nextValue = parseFloat(part);
 
         // Check for multiple decimal separators
-        if (String(part).split(".").length > 2) {
+        if (part.split(".").length > 2) {
+          // 1..1 -> [1, undefined, 1]
           throw new Error("Invalid number format");
         }
 
@@ -161,7 +166,7 @@ equalBtn.addEventListener("click", () => {
   const expression = calValue.join(""); // Is it needed?
   const result = evaluateExpression(expression);
   display.innerText = result;
-  calValue = [result];
+  calValue = [`${result}`];
   delBtn.addEventListener("click", () => {
     calValue = [];
   });

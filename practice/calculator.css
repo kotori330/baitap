@@ -35,7 +35,8 @@ body {
   text-align: right;
   padding-right: 0.2rem;
   height: 2rem;
-  overflow-x: scroll;
+  overflow: auto;
+  width: 100%;
 }
 
 .keypad {
