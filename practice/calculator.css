@@ -31,12 +31,20 @@ body {
 }
 
 .display-field {
-  margin-bottom: 0.7rem;
   text-align: right;
+  margin-bottom: 0.7rem;
   padding-right: 0.2rem;
+  padding-top: 0.4rem;
   height: 2rem;
-  overflow: auto;
-  width: 100%;
+  width: 12.2rem;
+  font-size: 1rem;
+
+  /* overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box; */
 }
 
 .keypad {
@@ -56,7 +64,7 @@ body {
 }
 
 .equal-btn {
-  grid-row-start: 2;
+  grid-row-start: 3;
   grid-row-end: 6;
   grid-column-start: 4;
   background-color: rgb(97, 160, 253);
@@ -71,6 +79,7 @@ body {
   background-color: rgb(179, 179, 179);
 }
 
-span {
+.display-field span {
   border: none !important;
+  display: inline-block !important;
 }

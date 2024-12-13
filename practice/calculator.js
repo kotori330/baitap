@@ -25,6 +25,7 @@ const numberButton = document.querySelectorAll(".btn");
 const equalBtn = document.querySelector(".equal-btn");
 const delBtn = document.querySelector(".del-btn");
 const display = document.querySelector(".display-field");
+const absoluteBtn = document.querySelector(".abs-btn");
 // const defaultDisplay = document.getElementById("_0")
 
 let calValue = [];
@@ -110,9 +111,16 @@ const cleanUpOperators = () => {
 
 const evaluateExpression = (expression) => {
   try {
+    // \d+\.?\d* e.g   123    123.45    0.45
+    // |: or
+    // \.\d+ e.g   .5    .123
+    // [+\-×÷] -> operators
+    // g flag: Continue to search entire the string
+    // Example: const expression = "123+456.78÷9.0×.12-34";
+    // => ["123", "+", "456.78", "÷", "9.0", "×", ".12", "-", "34"]
     const parts = expression.match(/(\d+\.?\d*|\.\d+|[+\-×÷])/g);
 
-    let result = parseFloat(parts[0]);
+    let result = parseFloat(parts[0]); // turn a whole string to numbers and operator
     if (!parts || parts.length < 3) {
       if (parts.length === 1) {
         result = parseFloat(parts[0]);
@@ -163,10 +171,10 @@ const evaluateExpression = (expression) => {
 };
 
 equalBtn.addEventListener("click", () => {
-  const expression = calValue.join(""); // Is it needed?
+  const expression = calValue.join(""); // Turn calValue array to a string. E.g: "1.1+2"
   const result = evaluateExpression(expression);
   display.innerText = result;
-  calValue = [`${result}`];
+  calValue = [result];
   delBtn.addEventListener("click", () => {
     calValue = [];
   });
@@ -180,6 +188,17 @@ delBtn.addEventListener("click", () => {
     displayDefaultZero();
   }
 });
+
+// absoluteBtn.addEventListener('click', () => {
+//   calValue.forEach((value, index) => {
+//     if (calValue[index] < 0) {
+
+//       if (calValue[index] || "+-×÷".includes(calValue[index - 1])) {
+//       Math.abs(value)
+//       }
+//     }
+//   })
+// })
 
 const displayDefaultZero = () => {
   const fragment = document.createDocumentFragment();
