@@ -45,8 +45,8 @@ let calValue = [];
     }
 
     cleanUpOperators();
-    console.log(button.value);
-    console.log(calValue);
+    // console.log(button.value);
+    console.log(`Cal Value: ${calValue}`);
   });
 });
 
@@ -60,7 +60,16 @@ const removeDefaultDisplay = () => {
 
 // For pushing value to calculation array
 const pushValueToCalValue = (value) => {
-  calValue.push(value);
+  if (
+    value === "-" &&
+    (calValue.length === 0 || calValue["+-×÷".includes(calValue.length - 1)])
+  ) {
+    calValue.push(value);
+  } else if (calValue[calValue.length - 1] === "-") {
+    calValue[calValue.length - 1] += value;
+  } else {
+    calValue.push(value);
+  }
   console.log(`Pushing value: ${value}`);
 };
 
@@ -71,7 +80,16 @@ const replaceValueInCalValue = (value) => {
   ) {
     calValue[calValue.length - 1] = value;
   } else {
-    calValue.push(value);
+    if (
+      value === "-" &&
+      (calValue.length === 0 || calValue["+-×÷".includes(calValue.length - 1)])
+    ) {
+      calValue.push(value);
+    } else if (calValue[calValue.length - 1] === "-") {
+      calValue[calValue.length - 1] += value;
+    } else {
+      calValue.push(value);
+    }
   }
 };
 
@@ -118,16 +136,22 @@ const evaluateExpression = (expression) => {
     // g flag: Continue to search entire the string
     // Example: const expression = "123+456.78÷9.0×.12-34";
     // => ["123", "+", "456.78", "÷", "9.0", "×", ".12", "-", "34"]
-    const parts = expression.match(/(\d+\.?\d*|\.\d+|[+\-×÷])/g);
+    // const parts = expression.match(/(\d+\.?\d*|\.\d+|[+\-×÷])/g);
+    const parts = expression.match(/-?\d+\.?\d*|-?\.\d+|[+\-×÷]/g);
 
     let result = parseFloat(parts[0]); // turn a whole string to numbers and operator
     if (!parts || parts.length < 3) {
       if (parts.length === 1) {
         result = parseFloat(parts[0]);
+      } else if (parts.length === 2 && parseFloat(parts[1]) < 0) {
+        parts.splice(1, 1, "-", Math.abs(parts[1])); // [1, -2] -> [1, -, 2]
       } else {
         throw new Error("Invalid expression");
       }
     }
+
+    console.log(`Parts is: ${parts}`);
+
     let currentOperator = null;
 
     for (let i = 0; i < parts.length; i++) {
@@ -138,7 +162,7 @@ const evaluateExpression = (expression) => {
         const nextValue = parseFloat(part);
 
         // Check for multiple decimal separators
-        if (part.split(".").length > 2) {
+        if (String(part).split(".").length > 2) {
           // 1..1 -> [1, undefined, 1]
           throw new Error("Invalid number format");
         }
@@ -209,3 +233,48 @@ const displayDefaultZero = () => {
   fragment.appendChild(defaultDisplay);
   display.appendChild(fragment);
 };
+
+absoluteBtn.addEventListener("click", () => {
+  // Đổi số âm dương khi có 1 số hạng
+  console.log(`CalValue before change operator: ${calValue}`);
+  if (!calValue.some((val) => "+-×÷".includes(val))) {
+    // 8-9 vẫn đang nhảy vào TH này
+    let temp = "";
+    for (let i = 0; i < calValue.length; i++) {
+      temp += calValue[i];
+    }
+    const toggleValue = 0 - parseFloat(temp);
+    calValue.splice(0, calValue.length, toggleValue);
+  }
+
+  // Đổi số âm dương khi có hai số hạng
+  if (calValue.some((val) => "+-×÷".includes(val))) {
+    let operatorIndex = -1;
+    let temp = "";
+    for (let i = 0; i < calValue.length; i++) {
+      if ("+-×÷".includes(calValue[i])) {
+        operatorIndex = i;
+        break;
+      }
+    }
+    for (let i = operatorIndex + 1; i < calValue.length; i++) {
+      temp += calValue[i];
+    }
+    const toggleValue = 0 - parseFloat(temp);
+    calValue.splice(
+      operatorIndex + 1,
+      calValue.length - operatorIndex - 1,
+      toggleValue
+    );
+  }
+
+  display.textContent = calValue.join("");
+  console.log(`CalValue after change operator: ${calValue}`);
+});
+
+// let Khiem = new Human('Khiem')
+//  let name = Khiem.name
+// ==> Khiem là 1 interface. Tương tự với String
+
+// String.toString(0) -> '0'
+// toString là 1 property của 1 obj nào đó, không thể đứng độc lập
