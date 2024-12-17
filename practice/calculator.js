@@ -65,8 +65,6 @@ const pushValueToCalValue = (value) => {
     (calValue.length === 0 || calValue["+-×÷".includes(calValue.length - 1)])
   ) {
     calValue.push(value);
-  } else if (calValue[calValue.length - 1] === "-") {
-    calValue[calValue.length - 1] += value;
   } else {
     calValue.push(value);
   }
@@ -143,7 +141,7 @@ const evaluateExpression = (expression) => {
     if (!parts || parts.length < 3) {
       if (parts.length === 1) {
         result = parseFloat(parts[0]);
-      } else if (parts.length === 2 && parseFloat(parts[1]) < 0) {
+      } else if (parts.length === 2 && parseFloat(parts[1]) <= 0) {
         parts.splice(1, 1, "-", Math.abs(parts[1])); // [1, -2] -> [1, -, 2]
       } else {
         throw new Error("Invalid expression");
@@ -156,7 +154,7 @@ const evaluateExpression = (expression) => {
 
     for (let i = 0; i < parts.length; i++) {
       const part = parts[i];
-      if ("+-×÷".includes(part) && !"0123456789".includes(part)) {
+      if ("+-×÷".includes(part) && !"0123456789.".includes(part)) {
         currentOperator = part;
       } else {
         const nextValue = parseFloat(part);
@@ -237,8 +235,10 @@ const displayDefaultZero = () => {
 absoluteBtn.addEventListener("click", () => {
   // Đổi số âm dương khi có 1 số hạng
   console.log(`CalValue before change operator: ${calValue}`);
-  if (!calValue.some((val) => "+-×÷".includes(val))) {
-    // 8-9 vẫn đang nhảy vào TH này
+  if (
+    !calValue.some((val) => "+-×÷".includes(val)) ||
+    "+-×÷".includes(calValue[calValue.length - 1])
+  ) {
     let temp = "";
     for (let i = 0; i < calValue.length; i++) {
       temp += calValue[i];
@@ -248,7 +248,11 @@ absoluteBtn.addEventListener("click", () => {
   }
 
   // Đổi số âm dương khi có hai số hạng
-  if (calValue.some((val) => "+-×÷".includes(val))) {
+  if (
+    (calValue.some((val) => "+-×÷".includes(val)) &&
+      "0123456789.".includes(calValue[calValue.length - 1])) ||
+    calValue[calValue.length - 1] < 0
+  ) {
     let operatorIndex = -1;
     let temp = "";
     for (let i = 0; i < calValue.length; i++) {
