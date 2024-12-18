@@ -138,6 +138,8 @@ const evaluateExpression = (expression) => {
     const parts = expression.match(/-?\d+\.?\d*|-?\.\d+|[+\-×÷]/g);
 
     let result = parseFloat(parts[0]); // turn a whole string to numbers and operator
+
+    // Check invalid expression
     if (!parts || parts.length < 3) {
       if (parts.length === 1) {
         result = parseFloat(parts[0]);
@@ -150,11 +152,11 @@ const evaluateExpression = (expression) => {
 
     console.log(`Parts is: ${parts}`);
 
+    // Expression calculation
     let currentOperator = null;
-
     for (let i = 0; i < parts.length; i++) {
       const part = parts[i];
-      if ("+-×÷".includes(part) && !"0123456789.".includes(part)) {
+      if ("+-×÷".includes(part)) {
         currentOperator = part;
       } else {
         const nextValue = parseFloat(part);
@@ -222,16 +224,6 @@ delBtn.addEventListener("click", () => {
 //   })
 // })
 
-const displayDefaultZero = () => {
-  const fragment = document.createDocumentFragment();
-  const defaultDisplay = document.createElement("span");
-  defaultDisplay.id = "_0";
-  defaultDisplay.textContent = "0";
-
-  fragment.appendChild(defaultDisplay);
-  display.appendChild(fragment);
-};
-
 absoluteBtn.addEventListener("click", () => {
   // Đổi số âm dương khi có 1 số hạng
   console.log(`CalValue before change operator: ${calValue}`);
@@ -249,9 +241,9 @@ absoluteBtn.addEventListener("click", () => {
 
   // Đổi số âm dương khi có hai số hạng
   if (
-    (calValue.some((val) => "+-×÷".includes(val)) &&
-      "0123456789.".includes(calValue[calValue.length - 1])) ||
-    calValue[calValue.length - 1] < 0
+    calValue.some((val) => "+-×÷".includes(val)) &&
+    ("0123456789.".includes(calValue[calValue.length - 1]) ||
+      calValue[calValue.length - 1] < 0)
   ) {
     let operatorIndex = -1;
     let temp = "";
@@ -275,6 +267,16 @@ absoluteBtn.addEventListener("click", () => {
   display.textContent = calValue.join("");
   console.log(`CalValue after change operator: ${calValue}`);
 });
+
+const displayDefaultZero = () => {
+  const fragment = document.createDocumentFragment();
+  const defaultDisplay = document.createElement("span");
+  defaultDisplay.id = "_0";
+  defaultDisplay.textContent = "0";
+
+  fragment.appendChild(defaultDisplay);
+  display.appendChild(fragment);
+};
 
 // let Khiem = new Human('Khiem')
 //  let name = Khiem.name
