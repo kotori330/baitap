@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wine Breweries</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        font-size: 1.6rem;
+
+        max-width: 130rem; /* responsive padding */
+        padding: 0 3.2rem;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      table {
+        width: 100%;
+        /* border-collapse: collapse; */
+        margin: 0 auto;
+      }
+
+      th {
+        background-color: #333;
+        color: #fff;
+        font-size: 2.5rem;
+      }
+
+      td {
+        padding: 1rem 2rem;
+        text-align: center;
+      }
+
+      .feature {
+        display: flex;
+        justify-content: space-between;
+        margin: 2rem 35rem;
+      }
+
+      .filter-feature {
+        padding: 1rem;
+        font-size: 1.6rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wine Breweries Showcase</h1>
+    <div class="feature">
+      <select class="filter-feature">
+        <option value="all">All</option>
+        <option value="micro">Micro</option>
+        <option value="large">Large</option>
+        <option value="closed">Closed</option>
+        <option value="brewpub">Brewpub</option>
+        <option value="proprietor">Proprietor</option>
+        <option value="contract">Contract</option>
+      </select>
+      <input type="text" class="search-feature" placeholder="Search..." />
+    </div>
+    <div class="display-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Address 1</th>
+            <th>Address 2</th>
+          </tr>
+        </thead>
+        <tbody id="container"></tbody>
+      </table>
+    </div>
+  </body>
+
+  <script defer>
+    // fetch ('https://api.openbrewerydb.org/v1/breweries')
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(error => console.log(error))
+
+    const postContainer = document.querySelector("#container");
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://api.openbrewerydb.org/v1/breweries"
+        );
+        const data = await response.json();
+        showBreweries(data);
+
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+
+    const showBreweries = (data) => {
+      postContainer.innerHTML = data
+        .map((item) => {
+          const { name, brewery_type, address_1, address_2 } = item;
+          return `
+        <div class="brewery">
+          <tr>
+            <td><b>${name}</b></td>
+            <td>${brewery_type}</td>
+            <td>${address_1}</td>
+            <td>${address_2}</td>
+        </div>
+      `;
+        })
+        .join("");
+    };
+  </script>
+</html>
