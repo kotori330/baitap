@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/2b7b1e7e5f.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<style>
+  :root {
+        --main-bg-color: #2a2a40;
+        --black: #000;
+        --dark-navy: #0a0a23;
+        --dark-grey: #d0d0d5;
+        --medium-grey: #dfdfe2;
+        --light-grey: #f5f6f7;
+        --peach: #f28373;
+        --salmon-color: #f0aea9;
+        --light-blue: #8bd9f6;
+        --light-orange: #f8b172;
+        --light-green: #93cb5b;
+        --golden-yellow: #f1ba33;
+        --gold: #f9aa23;
+        --green: #6bca6b;
+      }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  } 
+
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 1.6rem;
+
+    max-width: 130rem; /* responsive padding */
+    padding: 0 3.2rem;
+    margin: 0 auto;
+  }
+
+  .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-grey);
+  margin: 0 44rem;
+  padding: 2rem;
+}
+
+  h1 {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .board {
+    display : grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .square {
+      width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            font-size: 4rem;
+            background-color: var(--light-grey);
+        }
+
+        .square:hover {
+          background-color: var(--medium-grey);  
+          cursor: pointer;
+        }
+
+  /* .fa-solid {
+    font-size: 10rem;
+  } */
+
+  .x, .o {
+    display: none;
+  }
+
+</style>
+<body>
+  <h1>Welcome to Tic Tac Toe</h1>
+  <div class="main">
+    <div class="board">
+    </div>
+  </div>
+  </div>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const board = document.querySelector('.board')
+  const squares = document.querySelectorAll('.square')
+  const x = document.querySelectorAll('.x')
+  const o = document.querySelectorAll('.o')
+
+  const createCard = () => {
+    return `<div class="square">
+      <span class="x">
+        X
+      </span>
+      <span class="o">
+        O
+      </span>
+    </div>`;
+  }
+
+  board.innerHTML = [...Array(9).keys()].reduce((prev) => {
+    return prev + createCard();
+  }, '');
+  })
+
+  const playerMove = () => {
+    x.style.display = 'block';
+  }
+  
+[...squares].forEach(square => {
+  square.addEventListener('click', playerMove);
+})
+
+
+
+  // document.addEventListener("DOMContentLoaded", () => {
+  //   const board = document.querySelector('.board');
+
+  //   const createCard = (iconX, iconO) => {
+  //     return `<div class="square">
+  //       <span class="x">
+  //         <i class="fa-solid ${iconX}"></i>
+  //       </span>
+  //       <span class="o">
+  //         <i class="fa-solid ${iconO}"></i>
+  //       </span>
+  //     </div>`;
+  //   }
+
+  //   const cards = [
+  //     {
+  //       iconX: 'fa-x',
+  //       iconO: 'fa-o',
+  //     }
+  //   ];
+
+  //   board.textContent = cards.map(card => {
+  //     board.textContent += createCard(card.iconX, card.iconO);
+  //   });
+  // });
+</script>
+</html>

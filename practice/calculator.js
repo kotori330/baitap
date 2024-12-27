@@ -1,9 +1,31 @@
-const operatorButton = document.querySelectorAll('.operator-btn');
-const numberButton = document.querySelectorAll('.btn');
-const equalBtn = document.querySelector('.equal-btn');
-const delBtn = document.querySelector('.del-btn');
-const display = document.querySelector('.display-field');
-const absoluteBtn = document.querySelector('.abs-btn');
+// const plusBtn = document.querySelector(".plus-btn");
+// const minusBtn = document.querySelector(".minus-btn");
+// const multiBtn = document.querySelector(".multi-btn");
+// const divideBtn = document.querySelector(".divide-btn");
+// const sevenBtn = document.querySelector(".seven-btn");
+// const eightBtn = document.querySelector(".eight-btn");
+// const nineBtn = document.querySelector(".nine-btn");
+// const fourBtn = document.querySelector(".four-btn");
+// const fiveBtn = document.querySelector(".five-btn");
+// const sixBtn = document.querySelector(".six-btn");
+// const oneBtn = document.querySelector(".one-btn");
+// const twoBtn = document.querySelector(".two-btn");
+// const threeBtn = document.querySelector(".three-btn");
+// const zeroBtn = document.querySelector(".zero-btn");
+// const dotBtn = document.querySelector(".dot-btn");
+// const equalBtn = document.querySelector(".equal-btn");
+// const delBtn = document.querySelector(".del-btn");
+// const display = document.querySelector(".display-field");
+
+// const keypad = document.querySelector(".keypad")
+// const btns = Array.from(keypad.children)
+
+const operatorButton = document.querySelectorAll(".operator-btn");
+const numberButton = document.querySelectorAll(".btn");
+const equalBtn = document.querySelector(".equal-btn");
+const delBtn = document.querySelector(".del-btn");
+const display = document.querySelector(".display-field");
+const absoluteBtn = document.querySelector(".abs-btn");
 // const defaultDisplay = document.getElementById("_0")
 
 let calValue = [];
@@ -11,13 +33,13 @@ let calValue = [];
 // Print to the display screen + Add number to calculation array
 // Spread operator: Convert array-like object to array
 [...operatorButton, ...numberButton].forEach((button) => {
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     removeDefaultDisplay();
-    if ('0123456789.'.includes(button.value)) {
+    if ("0123456789.".includes(button.value)) {
       pushValueToCalValue(button.value);
       pushValueToScreen(button.value);
     }
-    if ('+-×÷'.includes(button.value)) {
+    if ("+-×÷".includes(button.value)) {
       replaceValueInCalValue(button.value);
       replaceValueOnScreen(button.value);
     }
@@ -30,7 +52,7 @@ let calValue = [];
 
 //remove default display when entering value
 const removeDefaultDisplay = () => {
-  const defaultDisplay = document.getElementById('_0');
+  const defaultDisplay = document.getElementById("_0");
   if (defaultDisplay) {
     defaultDisplay.remove();
   }
@@ -39,8 +61,8 @@ const removeDefaultDisplay = () => {
 // For pushing value to calculation array
 const pushValueToCalValue = (value) => {
   if (
-    value === '-' &&
-    (calValue.length === 0 || calValue['+-×÷'.includes(calValue.length - 1)])
+    value === "-" &&
+    (calValue.length === 0 || calValue["+-×÷".includes(calValue.length - 1)])
   ) {
     calValue.push(value);
   } else {
@@ -52,16 +74,16 @@ const pushValueToCalValue = (value) => {
 const replaceValueInCalValue = (value) => {
   if (
     display.lastChild && // Check if display exist before accessing its content
-    '+-×÷'.includes(calValue[calValue.length - 1])
+    "+-×÷".includes(calValue[calValue.length - 1])
   ) {
     calValue[calValue.length - 1] = value;
   } else {
     if (
-      value === '-' &&
-      (calValue.length === 0 || calValue['+-×÷'.includes(calValue.length - 1)])
+      value === "-" &&
+      (calValue.length === 0 || calValue["+-×÷".includes(calValue.length - 1)])
     ) {
       calValue.push(value);
-    } else if (calValue[calValue.length - 1] === '-') {
+    } else if (calValue[calValue.length - 1] === "-") {
       calValue[calValue.length - 1] += value;
     } else {
       calValue.push(value);
@@ -71,7 +93,7 @@ const replaceValueInCalValue = (value) => {
 
 // For pushing value to display screen
 const pushValueToScreen = (value) => {
-  const newItem = document.createElement('span');
+  const newItem = document.createElement("span");
   newItem.innerText = `${value}`;
   display.appendChild(newItem);
 };
@@ -79,11 +101,11 @@ const pushValueToScreen = (value) => {
 const replaceValueOnScreen = (value) => {
   if (
     display.lastChild && // Check if display exist before accessing its content
-    '+-×÷'.includes(display.lastChild.textContent)
+    "+-×÷".includes(display.lastChild.textContent)
   ) {
     display.lastChild.textContent = `${value}`;
   } else {
-    const newItem = document.createElement('span');
+    const newItem = document.createElement("span");
     newItem.innerText = `${value}`;
     display.appendChild(newItem);
   }
@@ -93,7 +115,7 @@ const replaceValueOnScreen = (value) => {
 const cleanUpOperators = () => {
   let operatorCount = 0;
   for (let value of calValue) {
-    if ('+-×÷'.includes(value)) {
+    if ("+-×÷".includes(value)) {
       operatorCount++;
     }
   }
@@ -122,9 +144,9 @@ const evaluateExpression = (expression) => {
       if (parts.length === 1) {
         result = parseFloat(parts[0]);
       } else if (parts.length === 2 && parseFloat(parts[1]) <= 0) {
-        parts.splice(1, 1, '-', Math.abs(parts[1])); // [1, -2] -> [1, -, 2]
+        parts.splice(1, 1, "-", Math.abs(parts[1])); // [1, -2] -> [1, -, 2]
       } else {
-        throw new Error('Invalid expression');
+        throw new Error("Invalid expression");
       }
     }
 
@@ -134,30 +156,30 @@ const evaluateExpression = (expression) => {
     let currentOperator = null;
     for (let i = 0; i < parts.length; i++) {
       const part = parts[i];
-      if ('+-×÷'.includes(part)) {
+      if ("+-×÷".includes(part)) {
         currentOperator = part;
       } else {
         const nextValue = parseFloat(part);
 
         // Check for multiple decimal separators
-        if (String(part).split('.').length > 2) {
+        if (String(part).split(".").length > 2) {
           // 1..1 -> [1, undefined, 1]
-          throw new Error('Invalid number format');
+          throw new Error("Invalid number format");
         }
 
         switch (currentOperator) {
-          case '+':
+          case "+":
             result += nextValue;
             break;
-          case '-':
+          case "-":
             result -= nextValue;
             break;
-          case '×':
+          case "×":
             result *= nextValue;
             break;
-          case '÷':
+          case "÷":
             if (nextValue === 0) {
-              throw new Error('Division by zero');
+              throw new Error("Division by zero");
             }
             result /= nextValue;
             break;
@@ -172,21 +194,21 @@ const evaluateExpression = (expression) => {
   }
 };
 
-equalBtn.addEventListener('click', () => {
-  const expression = calValue.join(''); // Turn calValue array to a string. E.g: "1.1+2"
+equalBtn.addEventListener("click", () => {
+  const expression = calValue.join(""); // Turn calValue array to a string. E.g: "1.1+2"
   const result = evaluateExpression(expression);
   display.innerText = result;
   calValue = [result];
-  delBtn.addEventListener('click', () => {
+  delBtn.addEventListener("click", () => {
     calValue = [];
   });
 });
 
-delBtn.addEventListener('click', () => {
+delBtn.addEventListener("click", () => {
   display.removeChild(display.lastChild);
   calValue.pop();
 
-  if (display.innerHTML.trim() == '') {
+  if (display.innerHTML.trim() == "") {
     displayDefaultZero();
   }
 });
@@ -202,14 +224,14 @@ delBtn.addEventListener('click', () => {
 //   })
 // })
 
-absoluteBtn.addEventListener('click', () => {
+absoluteBtn.addEventListener("click", () => {
   // Đổi số âm dương khi có 1 số hạng
   console.log(`CalValue before change operator: ${calValue}`);
   if (
-    !calValue.some((val) => '+-×÷'.includes(val)) ||
-    '+-×÷'.includes(calValue[calValue.length - 1])
+    !calValue.some((val) => "+-×÷".includes(val)) ||
+    "+-×÷".includes(calValue[calValue.length - 1])
   ) {
-    let temp = '';
+    let temp = "";
     for (let i = 0; i < calValue.length; i++) {
       temp += calValue[i];
     }
@@ -219,14 +241,14 @@ absoluteBtn.addEventListener('click', () => {
 
   // Đổi số âm dương khi có hai số hạng
   if (
-    calValue.some((val) => '+-×÷'.includes(val)) &&
-    ('0123456789.'.includes(calValue[calValue.length - 1]) ||
+    calValue.some((val) => "+-×÷".includes(val)) &&
+    ("0123456789.".includes(calValue[calValue.length - 1]) ||
       calValue[calValue.length - 1] < 0)
   ) {
     let operatorIndex = -1;
-    let temp = '';
+    let temp = "";
     for (let i = 0; i < calValue.length; i++) {
-      if ('+-×÷'.includes(calValue[i])) {
+      if ("+-×÷".includes(calValue[i])) {
         operatorIndex = i;
         break;
       }
@@ -242,15 +264,15 @@ absoluteBtn.addEventListener('click', () => {
     );
   }
 
-  display.textContent = calValue.join('');
+  display.textContent = calValue.join("");
   console.log(`CalValue after change operator: ${calValue}`);
 });
 
 const displayDefaultZero = () => {
   const fragment = document.createDocumentFragment();
-  const defaultDisplay = document.createElement('span');
-  defaultDisplay.id = '_0';
-  defaultDisplay.textContent = '0';
+  const defaultDisplay = document.createElement("span");
+  defaultDisplay.id = "_0";
+  defaultDisplay.textContent = "0";
 
   fragment.appendChild(defaultDisplay);
   display.appendChild(fragment);
