@@ -44,7 +44,7 @@
 
       max-width: 130rem; /* responsive padding */
       padding: 0 3.2rem;
-      margin: 0 auto;
+      margin: 0 auto; /* center the content */
     }
 
     .main {
@@ -52,8 +52,9 @@
       justify-content: center;
       align-items: center;
       background-color: var(--dark-grey);
-      /* margin: 0 44rem; */
       padding: 2rem;
+      width: 40rem;
+      margin: 0 auto;
     }
 
     h1 {
@@ -70,10 +71,10 @@
     .square {
       width: 100px;
       height: 100px;
+      border: none;
       display: flex;
       justify-content: center;
       align-items: center;
-      border: none;
       font-size: 4rem;
       background-color: var(--light-grey);
     }
@@ -83,13 +84,25 @@
       cursor: pointer;
     }
 
-    /* .fa-solid {
-    font-size: 10rem;
-  } */
+    .result {
+      font-size: 3rem;
+    }
 
-    .x-hidden,
-    .o-hidden {
-      display: none;
+    .result,
+    .reset {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .reset button {
+      padding: 1rem 2rem;
+      font-size: 2.4rem;
+      background-color: var(--light-grey);
+    }
+
+    .reset button:hover {
+      cursor: pointer;
+      background-color: var(--medium-grey);
     }
   </style>
   <body>
@@ -97,46 +110,96 @@
     <div class="main">
       <div class="board"></div>
     </div>
+    <div class="result"></div>
+    <div class="reset"></div>
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Create board
       const board = document.querySelector(".board");
+      const reset = document.querySelector(".reset");
+      const result = document.querySelector(".result");
 
       board.innerHTML = [...Array(9).keys()].reduce((prev, current, idx) => {
-        return (
-          prev +
-          `<div class="square" value="${idx}">
-      <span class="x-hidden">
-        X
-      </span>
-      <span class="o-hidden">
-        O
-      </span>
-    </div>`
-        );
+        return prev + `<div class="square" value="${idx}"></div>`;
       }, "");
 
+      reset.innerHTML = `<button type="button">Reset</button>`;
+
+      // Make X-0 moves
       const squares = document.querySelectorAll(".square");
-      const x = document.querySelectorAll(".x-hidden");
-      const o = document.querySelectorAll(".o-hidden");
+      let isXTurn = true;
+      let activeGame = true;
 
-      const playerMove = (index) => {
-        x[index].classList.remove("x-hidden");
-        x[index].removeEventListener("click", playerMove);
-      };
-
-      const computerMove = () => {
-        o[index].classList.remove("o-hidden");
-        o[index].removeEventListener("click", computerMove);
+      const makeMove = (index) => {
+        if (activeGame && !squares[index].hasChildNodes()) {
+          const fragment = document.createDocumentFragment();
+          const span = document.createElement("span");
+          span.textContent = isXTurn ? "X" : "O";
+          fragment.appendChild(span);
+          squares[index].appendChild(fragment);
+          isXTurn = !isXTurn;
+          if (
+            checkForWinner() ||
+            // convert NodeList "squares" to Array
+            Array.from(squares).every((square) => square.hasChildNodes())
+          ) {
+            activeGame = false;
+            displayWinner(checkForWinner());
+          }
+        }
       };
 
       squares.forEach((square, index) => {
-        square.addEventListener("click", () => playerMove(index));
+        // Does not need spread operator because there's only 1 NodeList
+        square.addEventListener("click", () => makeMove(index));
       });
 
-      squares.forEach((square, index) => {
-        square.addEventListener("click", () => computerMove(index));
-      });
+      // Check for winner
+      const checkForWinner = () => {
+        const winningCombos = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+
+        const winningCombo = winningCombos.find(([a, b, c]) => {
+          return (
+            squares[a].textContent &&
+            squares[a].textContent === squares[b].textContent &&
+            squares[a].textContent === squares[c].textContent
+          );
+        });
+
+        return winningCombo ? squares[winningCombo[0]].textContent : null;
+      };
+
+      const displayWinner = (winner) => {
+        const fragment = document.createDocumentFragment();
+        const p = document.createElement("p");
+        p.textContent = winner
+          ? `Winner is ${winner}. Congratulations!!!`
+          : "It's a draw!";
+        fragment.appendChild(p);
+        result.appendChild(fragment);
+      };
+
+      // reset game
+      const resetGame = () => {
+        squares.forEach((square) => {
+          square.textContent = "";
+        });
+        result.textContent = "";
+        activeGame = true;
+        isXTurn = true;
+      };
+
+      reset.addEventListener("click", resetGame);
     });
   </script>
 </html>
