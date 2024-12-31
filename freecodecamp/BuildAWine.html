@@ -187,14 +187,12 @@
         .map((item) => {
           const { name, brewery_type, address_1, phone } = item;
           return `
-
           <tr>  
             <td><b>${name}</b></td>
             <td>${brewery_type}</td>
             <td>${address_1}</td>
             <td>${phone}</td>
           </tr>
-
       `;
         })
         .join("");

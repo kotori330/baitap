@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <style>
+      :root {
+        --main-bg-color: #2a2a40;
+        --black: #000;
+        --dark-navy: #0a0a23;
+        --dark-grey: #d0d0d5;
+        --medium-grey: #dfdfe2;
+        --light-grey: #f5f6f7;
+        --peach: #f28373;
+        --salmon-color: #f0aea9;
+        --light-blue: #8bd9f6;
+        --light-orange: #f8b172;
+        --light-green: #93cb5b;
+        --golden-yellow: #f1ba33;
+        --gold: #f9aa23;
+        --green: #6bca6b;
+        --red: #ff0000;
+      }
+
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      body {
+        padding: 0 2rem;
+        font-size: 1.6rem;
+        width: 60rem;
+        margin: auto;
+      }
+
+      .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        background-color: var(--dark-grey);
+        padding: 6rem;
+      }
+
+      .square {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 9rem;
+        background-color: var(--light-grey);
+        font-size: 9rem;
+
+        width: 10rem;
+        height: 10rem;
+        border: var(--red);
+      }
+
+      .square:hover {
+        background-color: var(--medium-grey);
+      }
+
+      .reset {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .result {
+        font-size: 2.4rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      button {
+        font-size: 2.4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Tic Tac Toe</h1>
+    <div class="main">
+      <div class="board"></div>
+    </div>
+    <div class="result"></div>
+    <div class="reset"></div>
+  </body>
+  <script defer>
+    const board = document.querySelector(".board");
+    const result = document.querySelector(".result");
+    const reset = document.querySelector(".reset");
+
+    board.style.backgroundColor =
+      // Use createElement to prevent using innerHTML, thus prevent XSS
+      [...Array(9).keys()].reduce((prev, current, index) => {
+        const square = document.createElement("div");
+        square.classList.add("square");
+        board.appendChild(square);
+      }, "");
+
+    const squares = document.querySelectorAll(".square");
+
+    const resetButton = document.createElement("button");
+    resetButton.type = "button";
+    resetButton.classList.add("reset-btn");
+    resetButton.textContent = "Reset";
+    reset.appendChild(resetButton);
+
+    let isXTurn = true;
+    let activeGame = true;
+
+    const makeMove = (index) => {
+      const fragment = document.createDocumentFragment("div");
+      const span = document.createElement("span");
+      span.textContent = isXTurn ? "X" : "O";
+      fragment.appendChild(span);
+      squares[index].appendChild(fragment);
+
+      isXTurn = !isXTurn;
+    };
+
+    squares.forEach((square, index) => {
+      square.addEventListener("click", () => {
+        if (!squares[index].hasChildNodes() && activeGame) {
+          makeMove(index);
+        }
+
+        if (
+          activeGame &&
+          (checkForWinner() ||
+            Array.from(squares).every((square, index) =>
+              square.hasChildNodes()
+            ))
+        ) {
+          displayWinner(checkForWinner());
+          activeGame = false;
+        }
+      });
+    });
+
+    const checkForWinner = () => {
+      const winningCombos = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      let winner = null;
+
+      winningCombos.forEach(([a, b, c]) => {
+        if (
+          squares[a].textContent &&
+          squares[a].textContent === squares[b].textContent &&
+          squares[a].textContent === squares[c].textContent
+        ) {
+          winner = squares[a].textContent;
+          squares[a].style.backgroundColor = "red";
+          squares[b].style.backgroundColor = "red";
+          squares[c].style.backgroundColor = "red";
+          squares[a].style.color = "white";
+          squares[b].style.color = "white";
+          squares[c].style.color = "white";
+        }
+      });
+      return winner;
+    };
+
+    const displayWinner = (winner) => {
+      const fragment = document.createDocumentFragment("div");
+      const p = document.createElement("p");
+      p.textContent = checkForWinner()
+        ? `The winner is ${winner}`
+        : `"It's a draw!"`;
+
+      fragment.appendChild(p);
+      result.appendChild(fragment);
+    };
+
+    const clearContent = () => {
+      squares.forEach((square) => {
+        square.textContent = "";
+        square.style.backgroundColor = "";
+        square.style.color = "";
+      });
+      result.textContent = "";
+
+      isXTurn = true;
+      activeGame = true;
+    };
+
+    resetButton.addEventListener("click", clearContent);
+  </script>
+</html>
