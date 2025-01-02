@@ -107,13 +107,12 @@
     const result = document.querySelector(".result");
     const reset = document.querySelector(".reset");
 
-    board.style.backgroundColor =
-      // Use createElement to prevent using innerHTML, thus prevent XSS
-      [...Array(9).keys()].reduce((prev, current, index) => {
-        const square = document.createElement("div");
-        square.classList.add("square");
-        board.appendChild(square);
-      }, "");
+    // Use createElement to prevent using innerHTML, thus prevent XSS
+    [...Array(9).keys()].reduce((prev, current, index) => {
+      const square = document.createElement("div");
+      square.classList.add("square");
+      board.appendChild(square);
+    }, "");
 
     const squares = document.querySelectorAll(".square");
 
@@ -169,21 +168,71 @@
 
       let winner = null;
 
-      winningCombos.forEach(([a, b, c]) => {
+      // for (const winningCombo of winningCombos) {
+      //   const [a, b, c] = winningCombo;
+
+      //   if (
+      //     squares[a].textContent &&
+      //     squares[a].textContent === squares[b].textContent &&
+      //     squares[a].textContent === squares[c].textContent
+      //   ) {
+      //     winner = squares[a].textContent;
+
+      //     // coloring
+      //     winningCombo.forEach((idx) => {
+      //       squares[idx].style.backgroundColor = "red";
+      //       squares[idx].style.color = "white";
+      //     });
+
+      //     break;
+      //   }
+      // }
+
+      // alternatives
+      //
+      //   winningCombos.forEach((winningCombo) => {
+      //     const [a, b, c] = winningCombo;
+
+      //     if (
+      //       squares[a].textContent &&
+      //       squares[a].textContent === squares[b].textContent &&
+      //       squares[a].textContent === squares[c].textContent
+      //     ) {
+      //       winner = squares[a].textContent;
+
+      //       // coloring
+      //       winningCombo.forEach((idx) => {
+      //         squares[idx].style.backgroundColor = 'red';
+      //         squares[idx].style.color = 'white';
+      //       });
+
+      //       return winner;
+      //     }
+      //   });
+
+      const winningStyles = {
+        backgroundColor: "red",
+        color: "white",
+      };
+
+      // Check for a winner
+      for (let i = 0; i < winningCombos.length; i++) {
+        const [a, b, c] = winningCombos[i];
+
         if (
           squares[a].textContent &&
           squares[a].textContent === squares[b].textContent &&
           squares[a].textContent === squares[c].textContent
         ) {
           winner = squares[a].textContent;
-          squares[a].style.backgroundColor = "red";
-          squares[b].style.backgroundColor = "red";
-          squares[c].style.backgroundColor = "red";
-          squares[a].style.color = "white";
-          squares[b].style.color = "white";
-          squares[c].style.color = "white";
+          [a, b, c].forEach((idx) =>
+            Object.assign(squares[idx].style, winningStyles)
+          );
+
+          break;
         }
-      });
+      }
+
       return winner;
     };
 

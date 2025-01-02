@@ -151,33 +151,32 @@
           "https://api.openbrewerydb.org/v1/breweries"
         );
         originalData = await response.json();
-        applyFilters();
+        showBreweries(originalData);
+        applyFilters(originalData, filterBar.value, searchBar.value);
       } catch (error) {
         console.log(error);
       }
     };
 
-    const applyFilters = () => {
+    const applyFilters = (originalData, filterValue, searchValue) => {
       // Create a shallow copy of the original data
       // If we don't do this, the original data will be modified along with the filtered data
       let filteredData = [...originalData];
 
       // Filter by type
-      if (filterBar.value !== "all") {
+      if (filterValue !== "all") {
         filteredData = filteredData.filter(
-          (item) => item.brewery_type === filterBar.value
+          (item) => item.brewery_type === filterValue
         );
       }
 
       // Filter by name
-      const searchValue = searchBar.value;
       if (searchValue !== "") {
         filteredData = filteredData.filter((item) =>
           item.name.toLowerCase().includes(searchValue.toLowerCase())
         );
       }
-
-      showBreweries(filteredData);
+      return filteredData;
     };
 
     fetchData();
@@ -199,9 +198,23 @@
     };
 
     // filter by type
-    filterBar.addEventListener("change", applyFilters);
+    filterBar.addEventListener("change", (e) => {
+      const filteredData = applyFilters(
+        originalData,
+        filterBar.value,
+        searchBar.value
+      );
+      showBreweries(filteredData);
+    });
 
     // Filter by name
-    searchBar.addEventListener("input", applyFilters);
+    searchBar.addEventListener("input", (e) => {
+      const filteredData = applyFilters(
+        originalData,
+        filterBar.value,
+        searchBar.value
+      );
+      showBreweries(filteredData);
+    });
   </script>
 </html>
