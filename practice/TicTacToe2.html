@@ -103,33 +103,32 @@
     <div class="reset"></div>
   </body>
   <script defer>
-    const board = document.querySelector(".board");
-    const result = document.querySelector(".result");
-    const reset = document.querySelector(".reset");
+    const board = document.querySelector('.board');
+    const result = document.querySelector('.result');
+    const reset = document.querySelector('.reset');
 
-    board.style.backgroundColor =
-      // Use createElement to prevent using innerHTML, thus prevent XSS
-      [...Array(9).keys()].reduce((prev, current, index) => {
-        const square = document.createElement("div");
-        square.classList.add("square");
-        board.appendChild(square);
-      }, "");
+    // Use createElement to prevent using innerHTML, thus prevent XSS
+    [...Array(9).keys()].reduce((prev, current, index) => {
+      const square = document.createElement('div');
+      square.classList.add('square');
+      board.appendChild(square);
+    }, '');
 
-    const squares = document.querySelectorAll(".square");
+    const squares = document.querySelectorAll('.square');
 
-    const resetButton = document.createElement("button");
-    resetButton.type = "button";
-    resetButton.classList.add("reset-btn");
-    resetButton.textContent = "Reset";
+    const resetButton = document.createElement('button');
+    resetButton.type = 'button';
+    resetButton.classList.add('reset-btn');
+    resetButton.textContent = 'Reset';
     reset.appendChild(resetButton);
 
     let isXTurn = true;
     let activeGame = true;
 
     const makeMove = (index) => {
-      const fragment = document.createDocumentFragment("div");
-      const span = document.createElement("span");
-      span.textContent = isXTurn ? "X" : "O";
+      const fragment = document.createDocumentFragment('div');
+      const span = document.createElement('span');
+      span.textContent = isXTurn ? 'X' : 'O';
       fragment.appendChild(span);
       squares[index].appendChild(fragment);
 
@@ -137,7 +136,7 @@
     };
 
     squares.forEach((square, index) => {
-      square.addEventListener("click", () => {
+      square.addEventListener('click', () => {
         if (!squares[index].hasChildNodes() && activeGame) {
           makeMove(index);
         }
@@ -169,27 +168,54 @@
 
       let winner = null;
 
-      winningCombos.forEach(([a, b, c]) => {
+      for (const winningCombo of winningCombos) {
+        const [a, b, c] = winningCombo;
+
         if (
           squares[a].textContent &&
           squares[a].textContent === squares[b].textContent &&
           squares[a].textContent === squares[c].textContent
         ) {
           winner = squares[a].textContent;
-          squares[a].style.backgroundColor = "red";
-          squares[b].style.backgroundColor = "red";
-          squares[c].style.backgroundColor = "red";
-          squares[a].style.color = "white";
-          squares[b].style.color = "white";
-          squares[c].style.color = "white";
+
+          // coloring
+          winningCombo.forEach((idx) => {
+            squares[idx].style.backgroundColor = 'red';
+            squares[idx].style.color = 'white';
+          });
+
+          break;
         }
-      });
+      }
+
+      // alternatives
+      //
+      //   winningCombos.forEach((winningCombo) => {
+      //     const [a, b, c] = winningCombo;
+
+      //     if (
+      //       squares[a].textContent &&
+      //       squares[a].textContent === squares[b].textContent &&
+      //       squares[a].textContent === squares[c].textContent
+      //     ) {
+      //       winner = squares[a].textContent;
+
+      //       // coloring
+      //       winningCombo.forEach((idx) => {
+      //         squares[idx].style.backgroundColor = 'red';
+      //         squares[idx].style.color = 'white';
+      //       });
+
+      //       return winner;
+      //     }
+      //   });
+
       return winner;
     };
 
     const displayWinner = (winner) => {
-      const fragment = document.createDocumentFragment("div");
-      const p = document.createElement("p");
+      const fragment = document.createDocumentFragment('div');
+      const p = document.createElement('p');
       p.textContent = checkForWinner()
         ? `The winner is ${winner}`
         : `"It's a draw!"`;
@@ -200,16 +226,16 @@
 
     const clearContent = () => {
       squares.forEach((square) => {
-        square.textContent = "";
-        square.style.backgroundColor = "";
-        square.style.color = "";
+        square.textContent = '';
+        square.style.backgroundColor = '';
+        square.style.color = '';
       });
-      result.textContent = "";
+      result.textContent = '';
 
       isXTurn = true;
       activeGame = true;
     };
 
-    resetButton.addEventListener("click", clearContent);
+    resetButton.addEventListener('click', clearContent);
   </script>
 </html>
