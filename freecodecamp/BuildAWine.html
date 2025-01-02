@@ -151,8 +151,12 @@
           "https://api.openbrewerydb.org/v1/breweries"
         );
         originalData = await response.json();
-        showBreweries(originalData);
-        applyFilters(originalData, filterBar.value, searchBar.value);
+        const filteredData = applyFilters(
+          originalData,
+          filterBar.value,
+          searchBar.value
+        );
+        showBreweries(filteredData);
       } catch (error) {
         console.log(error);
       }
@@ -199,22 +203,12 @@
 
     // filter by type
     filterBar.addEventListener("change", (e) => {
-      const filteredData = applyFilters(
-        originalData,
-        filterBar.value,
-        searchBar.value
-      );
-      showBreweries(filteredData);
+      applyFilters(originalData, filterBar.value, searchBar.value);
     });
 
     // Filter by name
     searchBar.addEventListener("input", (e) => {
-      const filteredData = applyFilters(
-        originalData,
-        filterBar.value,
-        searchBar.value
-      );
-      showBreweries(filteredData);
+      applyFilters(originalData, filterBar.value, searchBar.value);
     });
   </script>
 </html>

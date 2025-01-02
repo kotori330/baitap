@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <script src="https://kit.fontawesome.com/2b7b1e7e5f.js" crossorigin="anonymous"></script> -->
-    <title>Document</title>
+    <title>TicTacToe</title>
   </head>
   <style>
     :root {
@@ -33,7 +33,7 @@
     }
 
     html {
-      font-size: 62.5%;
+      font-size: 62.5%; /* for user set browser default font size to 14pt */
     }
 
     body {
@@ -48,6 +48,9 @@
     }
 
     .main {
+      /* display: flex;
+      justify-content: center;
+      align-items: center; */
       background-color: var(--dark-grey);
       padding: 2rem;
       width: 40rem;
@@ -68,12 +71,13 @@
     .square {
       width: 100px;
       height: 100px;
+      font-size: 4rem;
+      background-color: var(--light-grey);
       border: none;
+
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 4rem;
-      background-color: var(--light-grey);
     }
 
     .square:hover {
@@ -117,13 +121,15 @@
       const reset = document.querySelector(".reset");
       const result = document.querySelector(".result");
 
-      board.innerHTML = [...Array(9).keys()].reduce((prev, current, idx) => {
-        return prev + `<div class="square" value="${idx}"></div>`;
-      }, "");
+      board.innerHTML = [...Array(9).keys()].reduce(
+        (prev, current, idx) =>
+          prev + `<div class="square" value="${idx}"></div>`,
+        ""
+      );
 
       reset.innerHTML = `<button type="button">Reset</button>`;
 
-      // Make X-0 moves
+      // Make X-O moves
       const squares = document.querySelectorAll(".square");
       let isXTurn = true;
       let activeGame = true;
@@ -136,13 +142,14 @@
           fragment.appendChild(span);
           squares[index].appendChild(fragment);
           isXTurn = !isXTurn;
+
+          const winner = checkForWinner();
           if (
-            checkForWinner() ||
-            // convert NodeList "squares" to Array
+            winner ||
             Array.from(squares).every((square) => square.hasChildNodes())
           ) {
             activeGame = false;
-            displayWinner(checkForWinner());
+            displayWinner(winner);
           }
         }
       };
