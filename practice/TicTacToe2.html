@@ -55,7 +55,7 @@
 
       .board {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(10, 1fr);
         gap: 0.5rem;
         background-color: var(--dark-grey);
         padding: 6rem;
@@ -109,7 +109,7 @@
 
     board.style.backgroundColor =
       // Use createElement to prevent using innerHTML, thus prevent XSS
-      [...Array(9).keys()].reduce((prev, current, index) => {
+      [...Array(100).keys()].reduce((prev, current, index) => {
         const square = document.createElement("div");
         square.classList.add("square");
         board.appendChild(square);
@@ -155,36 +155,159 @@
       });
     });
 
+    // const checkForWinner = () => {
+    //   const winningCombos = [
+    //     [0, 1, 2],
+    //     [3, 4, 5],
+    //     [6, 7, 8],
+    //     [0, 3, 6],
+    //     [1, 4, 7],
+    //     [2, 5, 8],
+    //     [0, 4, 8],
+    //     [2, 4, 6],
+    //   ];
+
+    //   let winner = null;
+
+    //   winningCombos.forEach(([a, b, c]) => {
+    //     if (
+    //       squares[a].textContent &&
+    //       squares[a].textContent === squares[b].textContent &&
+    //       squares[a].textContent === squares[c].textContent
+    //     ) {
+    //       winner = squares[a].textContent;
+    //       squares[a].style.backgroundColor = "red";
+    //       squares[b].style.backgroundColor = "red";
+    //       squares[c].style.backgroundColor = "red";
+    //       squares[a].style.color = "white";
+    //       squares[b].style.color = "white";
+    //       squares[c].style.color = "white";
+    //     }
+    //   });
+    //   return winner;
+    // };
+
     const checkForWinner = () => {
-      const winningCombos = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-      ];
-
-      let winner = null;
-
-      winningCombos.forEach(([a, b, c]) => {
-        if (
-          squares[a].textContent &&
-          squares[a].textContent === squares[b].textContent &&
-          squares[a].textContent === squares[c].textContent
-        ) {
-          winner = squares[a].textContent;
-          squares[a].style.backgroundColor = "red";
-          squares[b].style.backgroundColor = "red";
-          squares[c].style.backgroundColor = "red";
-          squares[a].style.color = "white";
-          squares[b].style.color = "white";
-          squares[c].style.color = "white";
-        }
+      const size = Math.sqrt(squares.length);
+      const board = Array(size)
+        .fill()
+        .map(() => Array(size).fill(""));
+      squares.forEach((square, index) => {
+        const row = Math.floor(index / size);
+        const col = index % size;
+        board[row][col] = square.textContent;
       });
-      return winner;
+
+      const target = 5;
+
+      // Helper to highlight winning cells
+      const highlightCells = (indices) => {
+        indices.forEach((index) => {
+          squares[index].style.backgroundColor = "red";
+          squares[index].style.color = "white";
+        });
+      };
+
+      // Check line and return winning indices
+      const checkLine = (line, startIndex, increment) => {
+        let count = 0;
+        let lastChar = "";
+        let winningIndices = [];
+        let currentIndices = [];
+
+        for (let i = 0; i < line.length; i++) {
+          const cell = line[i];
+          const currentIndex = startIndex + i * increment;
+
+          if (cell === lastChar && cell !== "") {
+            count++;
+            currentIndices.push(currentIndex);
+            if (count >= target) {
+              winningIndices = [...currentIndices];
+              return { winner: lastChar, indices: winningIndices };
+            }
+          } else {
+            count = 1;
+            lastChar = cell;
+            currentIndices = [currentIndex];
+          }
+        }
+        return null;
+      };
+
+      // Check rows
+      for (let row = 0; row < size; row++) {
+        const result = checkLine(board[row], row * size, 1);
+        if (result) {
+          highlightCells(result.indices);
+          return result.winner;
+        }
+      }
+
+      // Check columns
+      for (let col = 0; col < size; col++) {
+        const column = board.map((row) => row[col]);
+        const result = checkLine(column, col, size);
+        if (result) {
+          highlightCells(result.indices);
+          return result.winner;
+        }
+      }
+
+      // Check diagonals similar to before, but with highlighting...
+      const getDiagonal = (startRow, startCol, dRow, dCol) => {
+        const line = [];
+        let row = startRow;
+        let col = startCol;
+        while (row >= 0 && row < size && col >= 0 && col < size) {
+          line.push(board[row][col]);
+          row += dRow;
+          col += dCol;
+        }
+        return line;
+      };
+
+      for (let i = 0; i < size; i++) {
+        // Check diagonals starting from first row
+        const diagonal1 = getDiagonal(0, i, 1, 1);
+        const diagonal2 = getDiagonal(0, i, 1, -1);
+        if (diagonal1.length >= target) {
+          const winner = checkLine(diagonal1);
+          if (result) {
+            highlightCells(result.indices);
+            return result.winner;
+          }
+        }
+        if (diagonal2.length >= target) {
+          const winner = checkLine(diagonal2);
+          if (result) {
+            highlightCells(result.indices);
+            return result.winner;
+          }
+        }
+
+        // Check diagonals starting from first column
+        if (i > 0) {
+          const diagonal3 = getDiagonal(i, 0, 1, 1);
+          const diagonal4 = getDiagonal(i, size - 1, 1, -1);
+          if (diagonal3.length >= target) {
+            const winner = checkLine(diagonal3);
+            if (result) {
+              highlightCells(result.indices);
+              return result.winner;
+            }
+          }
+          if (diagonal4.length >= target) {
+            const winner = checkLine(diagonal4);
+            if (result) {
+              highlightCells(result.indices);
+              return result.winner;
+            }
+          }
+        }
+      }
+      // Return null if no winner
+      return null;
     };
 
     const displayWinner = (winner) => {
