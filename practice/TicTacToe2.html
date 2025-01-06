@@ -169,22 +169,59 @@
 
       let winner = null;
 
-      winningCombos.forEach(([a, b, c]) => {
+      // winningCombos.forEach(([a, b, c]) => {
+      //   if (
+      //     squares[a].textContent &&
+      //     squares[a].textContent === squares[b].textContent &&
+      //     squares[a].textContent === squares[c].textContent
+      //   ) {
+      //     winner = squares[a].textContent;
+      //     squares[a].style.backgroundColor = "red";
+      //     squares[b].style.backgroundColor = "red";
+      //     squares[c].style.backgroundColor = "red";
+      //     squares[a].style.color = "white";
+      //     squares[b].style.color = "white";
+      //     squares[c].style.color = "white";
+      //   }
+      // });
+      // return winner;
+
+      for (const winningCombo of winningCombos) {
+        const [a, b, c] = winningCombo;
         if (
           squares[a].textContent &&
           squares[a].textContent === squares[b].textContent &&
           squares[a].textContent === squares[c].textContent
         ) {
           winner = squares[a].textContent;
-          squares[a].style.backgroundColor = "red";
-          squares[b].style.backgroundColor = "red";
-          squares[c].style.backgroundColor = "red";
-          squares[a].style.color = "white";
-          squares[b].style.color = "white";
-          squares[c].style.color = "white";
+          winningCombo.forEach((idx) => {
+            squares[idx].style.backgroundColor = "red";
+            squares[idx].style.color = "white";
+          });
+          break;
         }
-      });
+      }
       return winner;
+
+      // const winningStyles = {
+      //   backgroundColor: "red",
+      //   color: "white",
+      // };
+      // for (let i = 0; i < winningCombos.length; i++) {
+      //   const [a, b, c] = winningCombos[i];
+      //   if (
+      //     squares[a].textContent &&
+      //     squares[a].textContent === squares[b].textContent &&
+      //     squares[a].textContent === squares[c].textContent
+      //   ) {
+      //     winner = squares[a].textContent;
+      //     [a, b, c].forEach((idx) =>
+      //       Object.assign(squares[idx].style, winningStyles)
+      //     );
+      //     break;
+      //   }
+      // }
+      // return winner;
     };
 
     const displayWinner = (winner) => {
