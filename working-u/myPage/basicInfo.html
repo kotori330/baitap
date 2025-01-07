@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MY PAGE | WORKING U</title>
+    <link rel="stylesheet" href="workingU.css" />
+  </head>
+  <body>
+    <nav id="header" class="flex"></nav>
+    <main class="flex">
+      <div id="side-bar" class="col-2"></div>
+
+      <div id="content-section" class="col-10">
+        <h1 id="page-title">My Page</h1>
+        <div id="intro" class="grid"></div>
+        <div id="dynamic-section-1">
+          <nav id="mini-navbar" class="flex flex-start"></nav>
+          <div id="dynamic-content">
+            <div id="basic-info"></div>
+            <div id="wage-info"></div>
+            <div id="family-info"></div>
+            <div id="parental-leave-info"></div>
+            <div id="account-settings"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script defer>
+    const loadComponents = async (id, file) => {
+      try {
+        const response = await fetch(file);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
+        }
+        const data = await response.text();
+        document.getElementById(id).innerHTML = data;
+      } catch (err) {
+        alert(err);
+      }
+    };
+
+    loadComponents(
+      "side-bar",
+      "http://127.0.0.1:3000/baitap/working-u/sidebar.html"
+    );
+    loadComponents(
+      "header",
+      "http://127.0.0.1:3000/baitap/working-u/header.html"
+    );
+    loadComponents(
+      "intro",
+      "http://127.0.0.1:3000/baitap/working-u/intro.html"
+    );
+    loadComponents(
+      "mini-navbar",
+      "http://127.0.0.1:3000/baitap/working-u/myPage/miniNavbar.html"
+    );
+    loadComponents(
+      "basic-info",
+      "http://127.0.0.1:3000/baitap/working-u/myPage/basicInfo.html"
+    );
+    loadComponents(
+      "wage-info",
+      "http://127.0.0.1:3000/baitap/working-u/myPage/wageInfo.html"
+    );
+    loadComponents(
+      "family-info",
+      "http://127.0.0.1:3000/baitap/working-u/myPage/familyInfo.html"
+    );
+    loadComponents(
+      "parental-leave-info",
+      "http://127.0.0.1:3000/baitap/working-u/myPage/parentalLeaveInfo.html"
+    );
+    loadComponents(
+      "account-settings",
+      "http://127.0.0.1:3000/baitap/working-u/myPage/accountSettings.html"
+    );
+
+    const dynamicContentSection = document.getElementById("dynamic-content");
+    const basicInfo = document.getElementById("basic-info");
+    const wageInfo = document.getElementById("wage-info");
+    const familyInfo = document.getElementById("family-info");
+    const parentalLeaveInfo = document.getElementById("parental-leave-info");
+    const accountSettings = document.getElementById("account-settings");
+
+    const navItems = [
+      basicInfo,
+      wageInfo,
+      familyInfo,
+      parentalLeaveInfo,
+      accountSettings,
+    ];
+
+    const createBasicInfoContent = () => {
+      const basicInfoItems = [
+        "Employee Number",
+        "Employee Name",
+        "Department",
+        "Role",
+        "Type of Employment",
+        "Gender",
+        "Date of Birth",
+      ];
+
+      const basicInfoContent = document.createElement("div");
+      basicInfoContent.innerHTML = [...Array(7).keys()].reduce(
+        (prev, current, idx) => {
+          return (
+            prev +
+            `<label>${basicInfoItems[idx]}</label><br><fieldset></fieldset>`
+          );
+        },
+        ""
+      );
+      dynamicContentSection.appendChild(basicInfoContent);
+
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          navItems.forEach((nav) => nav.classList.remove("active"));
+          item.classList.add("active");
+        });
+      });
+    };
+
+    createBasicInfoContent();
+    basicInfo.addEventListener("click", () => {
+      dynamicContentSection.textContent = "";
+      createBasicInfoContent();
+    });
+
+    wageInfo.addEventListener("click", () => {});
+
+    familyInfo.addEventListener("click", () => {
+      dynamicContentSection.textContent = "";
+      const basicInfoItems = [
+        "Employee Number",
+        "Employee Name",
+        "Department",
+        "Role",
+        "Type of Employment",
+        "Gender",
+        "Date of Birth",
+      ];
+
+      const basicInfoContent = document.createElement("div");
+      basicInfoContent.innerHTML = [...Array(7).keys()].reduce(
+        (prev, current, idx) => {
+          return (
+            prev +
+            `<label>${basicInfoItems[idx]}</label><br><fieldset></fieldset>`
+          );
+        },
+        ""
+      );
+      dynamicContentSection.appendChild(basicInfoContent);
+    });
+  </script>
+</html>
