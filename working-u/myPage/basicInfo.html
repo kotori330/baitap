@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MY PAGE | WORKING U</title>
-    <link rel="stylesheet" href="workingU.css" />
+    <link rel="stylesheet" href="../workingU.css" />
+    <!-- ".." to specify correct file path -->
   </head>
   <body>
     <nav id="header" class="flex"></nav>
@@ -57,10 +58,10 @@
       "mini-navbar",
       "http://127.0.0.1:3000/baitap/working-u/myPage/miniNavbar.html"
     );
-    loadComponents(
-      "basic-info",
-      "http://127.0.0.1:3000/baitap/working-u/myPage/basicInfo.html"
-    );
+    // loadComponents(
+    //   "basic-info",
+    //   "http://127.0.0.1:3000/baitap/working-u/myPage/basicInfo.html"
+    // );
     loadComponents(
       "wage-info",
       "http://127.0.0.1:3000/baitap/working-u/myPage/wageInfo.html"
@@ -132,29 +133,6 @@
 
     wageInfo.addEventListener("click", () => {});
 
-    familyInfo.addEventListener("click", () => {
-      dynamicContentSection.textContent = "";
-      const basicInfoItems = [
-        "Employee Number",
-        "Employee Name",
-        "Department",
-        "Role",
-        "Type of Employment",
-        "Gender",
-        "Date of Birth",
-      ];
-
-      const basicInfoContent = document.createElement("div");
-      basicInfoContent.innerHTML = [...Array(7).keys()].reduce(
-        (prev, current, idx) => {
-          return (
-            prev +
-            `<label>${basicInfoItems[idx]}</label><br><fieldset></fieldset>`
-          );
-        },
-        ""
-      );
-      dynamicContentSection.appendChild(basicInfoContent);
-    });
+    familyInfo.addEventListener("click", () => {});
   </script>
 </html>

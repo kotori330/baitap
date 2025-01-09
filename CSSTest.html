@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS TEST</title>
+    <style>
+      #demo-1 {
+        /* Resize */
+        resize: both; /* horizontal and vertical */
+        overflow: auto;
+
+        background-color: aqua;
+        height: 100px;
+        width: 100px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Hover animation */
+      #demo-2,
+      #demo-3 {
+        background-color: #f9f9f9;
+        height: 100px;
+        width: 100px;
+        margin-top: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #demo-2:hover {
+        box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1), -10px -10px 10px white;
+      }
+
+      #demo-3:hover {
+        box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1) inset,
+          -10px -10px 10px white inset;
+      }
+
+      /* Display when checkbox's checked */
+      .container {
+        display: none;
+        width: clamp(400px, 50vw, 800px); /* Responsive */
+      }
+
+      #checkbox:checked ~ .container {
+        display: block;
+      }
+
+      /* Backdrop-filter */
+      div.background {
+        background: lightblue url(klematis.jpg) no-repeat center;
+        background-size: cover;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+
+        margin-top: 20px;
+
+        /* Try to change this */
+        height: 100px;
+        width: 150px;
+      }
+
+      div.transbox {
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        padding: 20px;
+        margin: 30px;
+        font-weight: bold;
+      }
+
+      /* Gradient color the text */
+      #demo-6 h1 {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 100px;
+
+        background: linear-gradient(to right, red, blue);
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Heading increment */
+      :root {
+        counter-reset: headings;
+      }
+
+      #demo-7 h2 {
+        counter-increment: headings;
+      }
+
+      #demo-7 h2::before {
+        content: counter(headings);
+
+        background-color: rgb(92, 172, 247);
+        text-align: center;
+        border-radius: 2000px;
+        padding: 5px 15px;
+        margin: 0 10px;
+      }
+
+      /* Card swiper */
+      .wrapper {
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        /* scroll-padding: 0 24px; */
+
+        display: flex;
+        gap: 20px;
+        width: 300px;
+        cursor: grab;
+      }
+
+      .wrapper:active {
+        cursor: grabbing;
+      }
+
+      .cards {
+        scroll-snap-align: center;
+        box-sizing: border-box;
+        padding: 20px 30px;
+        flex-shrink: 0;
+        width: 300px;
+        background-color: rgb(146, 146, 146);
+        border-radius: 12px;
+        text-align: center;
+        list-style-type: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="demo-1" value="dark"><p>Try to resize</p></div>
+    <div id="demo-2" value="dark"><p>Hover me</p></div>
+    <div id="demo-3" value="dark"><p>Hover me</p></div>
+    <div id="demo-4" value="dark">
+      <input type="checkbox" id="checkbox" />
+      <label for="checkbox">Check this</label>
+      <fieldset class="container">Display when checked</fieldset>
+    </div>
+    <div id="demo-5" class="background" value="dark">
+      <div class="transbox">
+        <p>backdrop-filter: blur(5px)</p>
+      </div>
+    </div>
+    <div id="demo-6">
+      <h1>Hello World</h1>
+    </div>
+    <div id="demo-7">
+      <fieldset class="heading-numbering">
+        <h1>Heading increment</h1>
+        <h2>Title 1</h2>
+        <h2>Title 2</h2>
+        <h2>Title 3</h2>
+      </fieldset>
+    </div>
+    <div id="demo-8">
+      <ul class="wrapper">
+        <li class="cards">Card 1</li>
+        <li class="cards">Card 2</li>
+        <li class="cards">Card 3</li>
+      </ul>
+    </div>
+  </body>
+</html>
