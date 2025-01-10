@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MY PAGE | WORKING U</title>
+    <link rel="stylesheet" href="../workingU.css" />
+    <!-- ".." to specify correct file path -->
+  </head>
+  <body>
+    <nav class="flex">
+      <div class="logo">
+        <h2>Working U</h2>
+      </div>
+      <div class="profile-picture">
+        <p>Hi,<span id="account-name"></span></p>
+        <img />
+      </div>
+    </nav>
+    <main class="flex">
+      <div id="side-bar" class="col-2">
+        <div id="side-bar-1">
+          <p id="dashboard">Dashboard</p>
+          <p id="my-page">My Page</p>
+          <p id="my-task" class="active active-background">My Task</p>
+          <p id="generate-plan">Generate Plans using AI</p>
+        </div>
+        <div id="side-bar-2">
+          <p>Manage Plan Receivers</p>
+          <p>Manage Tasks</p>
+          <p>Manage Request for Parental leave</p>
+          <p>Manage Task Masters</p>
+          <p>Manage Business Info</p>
+        </div>
+      </div>
+      <div id="content-section" class="col-10">
+        <h1 id="page-title">List of Recipient's Personal Tasks</h1>
+        <div id="intro" class="grid">
+          <div>
+            <div class="flex">
+              <img />
+              <h2>Account Name</h2>
+              <span id="account-tag" class="flex center">Already Reported</span>
+            </div>
+            <div id="expected-birthday" class="flex space">
+              <p>Expected Birthday</p>
+              <p>|</p>
+              <p>2024/12/25</p>
+            </div>
+          </div>
+          <div id="modal-btns">
+            <div class="flex flex-end">
+              <button id="give-birth-btn" type="button">
+                Giving Birth Report
+              </button>
+
+              <!-- Modal 1 -->
+              <div id="birth-report-modal" class="modal">
+                <div id="modal-1" class="modal-content">
+                  <!-- Modal Header -->
+                  <span class="close-modal">&times;</span>
+                  <div id="modal-1-header" class="center">
+                    <h2>Birth Report</h2>
+                    <span>Please register the Birth Date</span>
+                  </div>
+                  <!-- Modal Content -->
+                  <div id="modal-1-content">
+                    <label for="birth-date">Birth Date</label
+                    ><span class="required">*</span>
+                    <br />
+                    <input
+                      required
+                      id="birth-date"
+                      type="date"
+                      placeholder="Choose Date"
+                    />
+                    <br />
+                    <label>Parental Leave Desire</label
+                    ><span class="required">*</span>
+                    <br />
+                    <input
+                      required
+                      type="radio"
+                      id="leave-yes"
+                      name="leave-desire"
+                      checked="checked"
+                      value="yes"
+                    />
+                    <label for="leave-yes">Yes</label>
+                    <input
+                      required
+                      type="radio"
+                      id="leave-no"
+                      name="leave-desire"
+                      value="no"
+                    />
+                    <label for="leave-no">No</label>
+                  </div>
+                  <!-- Modal Footer -->
+                  <div id="modal-1-footer" class="grid">
+                    <button class="cancel-btn" type="button">Cancel</button>
+                    <button class="submit-btn" type="button">Report</button>
+                  </div>
+                </div>
+              </div>
+
+              <button id="register-parental-btn" type="button">
+                Register Parental Info
+              </button>
+
+              <div class="tooltip">
+                <button id="stop-leave-btn" type="button">...</button>
+                <span class="tooltiptext"
+                  >For user who has not given birth</span
+                >
+              </div>
+            </div>
+            <div id="see-task-list-text" class="flex flex-end">
+              <p>See task list ></p>
+            </div>
+          </div>
+        </div>
+        <div id="dynamic-section-header">
+          <span>[number/number] completed</span>
+          <button type="button"></button>
+        </div>
+        <div id="dynamic-section-1">
+          </div>
+          <div id="dynamic-content"></div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script defer>
+    const dynamicContentSection = document.getElementById("dynamic-content");
+
+    const birthReportModal = document.getElementById("birth-report-modal");
+    const birthReportModalContent = document.getElementById("modal-1");
+    const birthReportBtn = document.getElementById("give-birth-btn");
+    const closeModalBtn = document.getElementsByClassName("close-modal")[0];
+
+    const cancelBtn = document.getElementsByClassName("cancel-btn")[0];
+
+    const sidebar = document.getElementById("side-bar")
+    const dashboard = document.getElementById('dashboard');
+  const myPage = document.getElementById('my-page');
+  const myTask = document.getElementById('my-task');
+  const generatePlan = document.getElementById('generate-plan');
+    
+  // Navigate to My Page
+      myPage.addEventListener('click', (e) => {
+      window.location.href = 'http://127.0.0.1:3000/baitap/working-u/myPage/index.html'
+    }) 
+
+    // Modal
+    const displayModal = () => {
+      birthReportModal.classList.add("show");
+      birthReportModalContent.style.animation = "zoomIn 0.5s forwards";
+      birthReportModal.style.display = "block";
+    };
+
+    const closeModal = () => {
+      birthReportModalContent.style.animation = "zoomOut 0.5s forwards";
+      setTimeout(() => {
+        birthReportModal.style.display = "none";
+      }, 500); // Match the duration of the animation
+    };
+
+    birthReportBtn.addEventListener("click", displayModal);
+    [closeModalBtn, cancelBtn].forEach((btn) =>
+      btn.addEventListener("click", closeModal)
+    );
+    window.addEventListener("click", (e) => {
+      if (e.target === birthReportModal) {
+        closeModal();
+      }
+    });
+  </script>
+  </html>

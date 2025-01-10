@@ -1,0 +1,48 @@
+<!-- Modal 1 -->
+
+  <div id="modal-1" class="modal-content">
+    <!-- Modal Header -->
+    <span class="close-modal">&times;</span>
+    <div id="modal-1-header" class="center">
+      <h2>Birth Report</h2>
+      <span>Please register the Birth Date</span>
+    </div>
+    <!-- Modal Content -->
+    <div id="modal-1-content">
+      <label for="birth-date">Birth Date</label
+      ><span class="required">*</span>
+      <br />
+      <input
+        required
+        id="birth-date"
+        type="date"
+        placeholder="Choose Date"
+      />
+      <br />
+      <label>Parental Leave Desire</label
+      ><span class="required">*</span>
+      <br />
+      <input
+        required
+        type="radio"
+        id="leave-yes"
+        name="leave-desire"
+        checked="checked"
+        value="yes"
+      />
+      <label for="leave-yes">Yes</label>
+      <input
+        required
+        type="radio"
+        id="leave-no"
+        name="leave-desire"
+        value="no"
+      />
+      <label for="leave-no">No</label>
+    </div>
+    <!-- Modal Footer -->
+    <div id="modal-1-footer" class="grid">
+      <button class="cancel-btn" type="button">Cancel</button>
+      <button class="submit-btn" type="button">Report</button>
+    </div>
+  </div>
