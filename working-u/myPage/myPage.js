@@ -8,7 +8,6 @@ const loadComponents = async (id, file) => {
     }
     const data = await response.text();
     document.getElementById(id).innerHTML = data;
-    attachEventListeners(); // Attach event listeners after loading components
   } catch (err) {
     console.log(err);
   }
@@ -16,7 +15,6 @@ const loadComponents = async (id, file) => {
 
 const path = "http://127.0.0.1:3000/baitap/working-u";
 // document.addEventListener("DOMContentLoaded",
-
 (async () => {
   try {
     await loadComponents("side-bar", `${path}/components/sidebar.html`);
@@ -28,12 +26,13 @@ const path = "http://127.0.0.1:3000/baitap/working-u";
     );
     await loadComponents("mini-navbar", `${path}/myPage/miniNavbar.html`);
     await loadComponents("dynamic-content", `${path}/myPage/basicInfo.html`);
+    attachEventListeners(); // Attach event listeners after loading components
   } catch (err) {
     console.error(err);
   }
 })();
 
-const attachEventListeners = async () => {
+const attachEventListeners = () => {
   // Initial load of components
 
   const dynamicContentSection = document.getElementById("dynamic-content");
@@ -97,9 +96,11 @@ const attachEventListeners = async () => {
     basicInfo.addEventListener("click", () => {
       dynamicContentSection.textContent = "";
       (async () => {
-        await loadComponents("dynamic-content", `${path}/myPage/basicInfo.html`);
-
-      })()
+        await loadComponents(
+          "dynamic-content",
+          `${path}/myPage/basicInfo.html`
+        );
+      })();
 
       miniNavbarAnimation.style.width = "10rem";
       miniNavbarAnimation.style.left = "0";
@@ -112,8 +113,7 @@ const attachEventListeners = async () => {
       dynamicContentSection.textContent = "";
       (async () => {
         await loadComponents("dynamic-content", `${path}/myPage/wageInfo.html`);
-
-      })()
+      })();
 
       miniNavbarAnimation.style.width = "8rem";
       miniNavbarAnimation.style.left = "12rem";
@@ -125,9 +125,11 @@ const attachEventListeners = async () => {
     familyInfo.addEventListener("click", () => {
       dynamicContentSection.textContent = "";
       (async () => {
-       await  loadComponents("dynamic-content", `${path}/myPage/familyInfo.html`);
-
-      })()
+        await loadComponents(
+          "dynamic-content",
+          `${path}/myPage/familyInfo.html`
+        );
+      })();
 
       miniNavbarAnimation.style.width = "17rem";
       miniNavbarAnimation.style.left = "22.5rem";
@@ -143,8 +145,7 @@ const attachEventListeners = async () => {
           "dynamic-content",
           `${path}/myPage/parentalLeaveInfo.html`
         );
-
-      })()
+      })();
 
       miniNavbarAnimation.style.width = "13.5rem";
       miniNavbarAnimation.style.left = "42rem";
@@ -156,9 +157,11 @@ const attachEventListeners = async () => {
     accountSettings.addEventListener("click", () => {
       dynamicContentSection.textContent = "";
       (async () => {
-
-        await loadComponents("dynamic-content", `${path}/myPage/accountSettings.html`);
-      })()
+        await loadComponents(
+          "dynamic-content",
+          `${path}/myPage/accountSettings.html`
+        );
+      })();
 
       miniNavbarAnimation.style.width = "11.5rem";
       miniNavbarAnimation.style.left = "59rem";

@@ -44,11 +44,11 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5% !important;
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 2.4rem !important;
   padding: 0 2rem;
   margin: 0 auto;
 }
@@ -363,8 +363,16 @@ main {
   color: red;
 }
 
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
 td, th {
-  padding: 0 5rem;
+  padding: 0.8rem 0;
+  text-align: center;
+  border-bottom: 0.1rem solid #ddd;
 }
 
 @keyframes fade-slide {
