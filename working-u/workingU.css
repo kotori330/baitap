@@ -236,6 +236,14 @@ main {
   justify-content: space-evenly;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
+.float-right {
+  float: right;
+}
+
 .hide {
   display: none;
 }
@@ -311,9 +319,7 @@ main {
   padding: 2rem;
   width: 40%;
   border-radius: 1rem;
-
 }
-
 
 .close-modal {
   color: #aaaaaa;
@@ -355,7 +361,10 @@ main {
 
 .required {
   color: red;
+}
 
+td, th {
+  padding: 0 5rem;
 }
 
 @keyframes fade-slide {

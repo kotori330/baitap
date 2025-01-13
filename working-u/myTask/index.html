@@ -8,20 +8,27 @@
     <!-- ".." to specify correct file path -->
   </head>
   <body>
-    <nav id='header' class="flex"></nav>
+    <nav id="header" class="flex"></nav>
     <main class="flex">
       <div id="side-bar" class="col-2"></div>
       <div id="content-section" class="col-10">
         <h1 id="page-title">List of recipient's personal tasks</h1>
         <div id="intro" class="grid"></div>
+        <div id="completed-task" class="flex space-between">
+          <span>number/number completed</span>
+          <button type="button">+ Add more irregular task</button>
+        </div>
         <div id="dynamic-section-1">
-          <nav id="mini-navbar" class="flex flex-start">
-          </nav>
-          <div id="dynamic-content"></div>
+          <div id="dynamic-content">
+            <table>
+              <thead id="table-header"></thead>
+              <tbody id="table-content"></tbody>
+            </table>
+            <div id="table-footer" class="float-right"></div>
+          </div>
         </div>
       </div>
     </main>
   </body>
-  <script defer src="../workingU.js">
-  </script>
+  <script src="myTask.js"></script>
 </html>
