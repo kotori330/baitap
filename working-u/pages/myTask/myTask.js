@@ -36,31 +36,31 @@ const attachEventListeners = () => {
     });
   });
 
-   // For modals
-   const modal1btn = document.getElementById("give-birth-btn");
-   const modal1 = document.getElementById("birth-report-modal");
-   const cancelBtn = document.getElementsByClassName("cancel-btn")[0];
-   const closeModalBtn = document.getElementsByClassName("close-modal")[0];
- 
-   const openModal = () => {
-     modal1.style.display = "block";
-     modal1.classList.add("show");
-   };
-   const closeModal = () => (modal1.style.display = "none");
-   modal1btn.addEventListener("click", openModal);
-   if (cancelBtn && closeModalBtn) {
-     cancelBtn.addEventListener("click", closeModal);
-     closeModalBtn.addEventListener("click", closeModal);
-     window.addEventListener("click", (e) => {
-       if (e.target == modal1) {
-         closeModal();
-       }
-     });
-   }
+  // For modals
+  const modal1btn = document.getElementById("give-birth-btn");
+  const modal1 = document.getElementById("birth-report-modal");
+  const cancelBtn = document.getElementsByClassName("cancel-btn")[0];
+  const closeModalBtn = document.getElementsByClassName("close-modal")[0];
+
+  const openModal = () => {
+    modal1.style.display = "block";
+    modal1.classList.add("show");
+  };
+  const closeModal = () => (modal1.style.display = "none");
+  modal1btn.addEventListener("click", openModal);
+  if (cancelBtn && closeModalBtn) {
+    cancelBtn.addEventListener("click", closeModal);
+    closeModalBtn.addEventListener("click", closeModal);
+    window.addEventListener("click", (e) => {
+      if (e.target == modal1) {
+        closeModal();
+      }
+    });
+  }
 };
 
 // Initial load of components
-const path = "http://127.0.0.1:3000/baitap/working-u";
+const path = "http://127.0.0.1:3000/working-u";
 loadComponents("side-bar", `${path}/components/sidebar.html`);
 loadComponents("header", `${path}/components/header.html`);
 loadComponents("intro", `${path}/components/intro.html`);

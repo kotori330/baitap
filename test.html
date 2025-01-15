@@ -1,122 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoom In-Out Modal with Keyframes</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-}
-
-#openModalBtn {
-    padding: 15px 30px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0; /* Start invisible */
-    transition: opacity 0.5s ease; /* Fade effect */
-}
-
-.modal.show {
-    display: block;
-    opacity: 1; /* Fade in */
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 5px;
-    animation: zoomIn 0.5s forwards; /* Zoom in animation */
-}
-
-@keyframes zoomIn {
-    from {
-        transform: scale(0);
-    }
-    to {
-        transform: scale(1);
-    }
-}
-
-@keyframes zoomOut {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(0);
-    }
-}
-
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-    </style>
-</head>
-<body>
-    <button id="openModalBtn">Open Modal</button>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeModalBtn">&times;</span>
-            <h2>Modal Title</h2>
-            <p>This is some content inside the modal!</p>
-            <button id="cancelBtn">Cancel</button>
-        </div>
-    </div>
-
-    <script defer>
-        const openModalBtn = document.getElementById('openModalBtn');
-const modal = document.getElementById('modal');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const cancelBtn = document.getElementById('cancelBtn');
-const modalContent = modal.querySelector('.modal-content');
-
-function openModal() {
-    modal.classList.add('show');
-    modalContent.style.animation = 'zoomIn 0.5s forwards'; // Zoom in on open
-}
-
-function closeModal() {
-    modalContent.style.animation = 'zoomOut 0.5s forwards'; // Zoom out on close
-    setTimeout(() => {
-        modal.classList.remove('show');
-    }, 500); // Match this duration with the CSS animation duration
-}
-
-openModalBtn.addEventListener('click', openModal);
-closeModalBtn.addEventListener('click', closeModal);
-cancelBtn.addEventListener('click', closeModal);
-    </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>ajsdkj</p>
+  </body>
+  <script defer>
+    const check = typeof 3;
+    console.log(check);
+    const a = () => b => c => d
+  </script>
 </html>

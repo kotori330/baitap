@@ -1,40 +1,22 @@
-.col-1 {
-  width: 8.33%;
+/* Variables */
+@import "/working-u/node_modules/bootstrap/dist/css/bootstrap.css";
+@import "/working-u/pages/myPage/myPage.css";
+#mini-navbar .nav-link {
+  color: black;
+  border: transparent;
 }
-.col-2 {
-  width: 16.66%;
+#mini-navbar .nav-link.active {
+  color: green;
+  border-color: transparent;
+  border-bottom: 1px solid green;
 }
-.col-3 {
-  width: 25%;
-}
-.col-4 {
-  width: 33.33%;
-}
-.col-5 {
-  width: 41.66%;
-}
-.col-6 {
-  width: 50%;
-}
-.col-7 {
-  width: 58.33%;
-}
-.col-8 {
-  width: 66.66%;
-}
-.col-9 {
-  width: 75%;
-}
-.col-10 {
-  width: 83.33%;
-}
-.col-11 {
-  width: 91.66%;
-}
-.col-12 {
-  width: 100%;
+#mini-navbar .nav-link:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s;
 }
 
+/* Reset */
 *,
 *::before,
 *::after {
@@ -43,20 +25,21 @@
   margin: 0;
 }
 
+/* Base Styles */
 html {
-  font-size: 62.5% !important;
+  font-size: 62.5%;
 }
 
 body {
-  font-size: 2.4rem !important;
+  font-size: 2.4rem;
   padding: 0 2rem;
   margin: 0 auto;
 }
 
+/* Additional customizations */
 nav {
   justify-content: space-between;
   align-items: center;
-
   /* position: fixed; */
   padding: 2rem 0;
   border-bottom: 1px solid black;
@@ -131,6 +114,10 @@ main {
   cursor: pointer;
 }
 
+#modal-1-footer {
+  grid-template-columns: repeat(2, auto);
+}
+
 #give-birth-btn {
   background-color: green;
   color: white;
@@ -147,65 +134,9 @@ main {
   margin-top: 1rem;
 }
 
-#mini-navbar {
-  position: relative;
-}
-
-#mini-navbar span {
-  margin: 0 2rem;
-}
-
-#mini-navbar span:hover {
-  opacity: 0.7;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-#mini-navbar .animation {
-  background: #2df32d;
-  position: absolute;
-  height: 3%;
-  bottom: -1%;
-  z-index: 0;
-  border-radius: 0.8rem;
-}
-
-#mini-navbar .start-basic-info {
-  width: 10rem;
-  left: 0;
-}
-
-#dynamic-content label {
-  display: block; /* label is an inline element -> horizontal spacing don't take effect */
-  margin: 2rem 0 -1rem 0;
-}
-
-#dynamic-content fieldset {
-  border-radius: 0.5rem;
-  padding: 1rem 1.5rem;
-}
-
-#account-settings-content span:nth-of-type(2) {
-  display: inline-block;
-  border: 0.2rem dashed green;
-  border-radius: 1.5rem;
-  padding: 1rem;
-  color: green;
-}
-
-#account-settings-content span:nth-of-type(2):hover {
-  opacity: 0.7;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-#modal-1-footer {
-  grid-template-columns: repeat(2, auto);
-}
-
-/* CSS Pre-defined Classes */
+/* Utility Classes */
 .active {
-  color: #16bd16;
+  color: #00e600;
 }
 
 .active-background {
@@ -219,17 +150,19 @@ main {
 .flex {
   display: flex;
 }
-
 .flex-wrap {
   flex-wrap: wrap;
 }
-
 .flex-end {
   justify-content: flex-end;
 }
-
 .flex-start {
   justify-content: flex-start;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .space-evenly {
@@ -248,38 +181,30 @@ main {
   display: none;
 }
 
-.center {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+/* Typography */
+.required {
+  color: red;
 }
 
+/* Tooltip */
 .tooltip {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  animation: fade-slide 0.05s forwards;
-}
-
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 25rem;
   background-color: black;
-  color: #fff;
+  color: white;
   text-align: center;
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   padding: 0.5rem;
-
   position: absolute;
   top: -3.5rem;
   left: -21rem;
   z-index: 1;
 }
-
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
@@ -290,7 +215,12 @@ main {
   border-style: solid;
   border-color: black transparent transparent transparent;
 }
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  animation: fade-slide 0.05s forwards;
+}
 
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -302,79 +232,60 @@ main {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: #00000066;
-
+  background-color: rgba(0, 0, 0, 0.4);
   opacity: 0; /* Start invisible */
-    transition: opacity 0.5s ease;
+  transition: opacity 0.3s ease;
 }
-
 .modal.show {
   display: block;
   opacity: 1; /* Fade in */
 }
-
-.modal-content {
+.modal .modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 2rem;
   width: 40%;
   border-radius: 1rem;
 }
-
-.close-modal {
+.modal .close-modal {
   color: #aaaaaa;
   float: right;
   font-size: 3rem;
   font-weight: bold;
 }
-
-.close-modal:hover, .close-modal:focus {
+.modal .close-modal:hover, .modal .close-modal:focus {
   background-color: #e5e5e5;
   cursor: pointer;
   text-decoration: none;
   transition: 0.3s;
 }
 
-
-.cancel-btn {
+/* Buttons */
+button {
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  transition: 0.3s;
+}
+button.cancel-btn {
   background-color: #fefefe;
   border: green;
-  color: green
+  color: green;
 }
-.cancel-btn:hover {
+button.cancel-btn:hover {
   opacity: 0.7;
-  transition: 0.3s;
   cursor: pointer;
 }
-
-.submit-btn {
+button.submit-btn {
   background-color: green;
   border: green;
   color: white;
 }
-
-.submit-btn:hover {
+button.submit-btn:hover {
   opacity: 0.7;
-  transition: 0.3s;
   cursor: pointer;
 }
 
-.required {
-  color: red;
-}
-
-/* Table */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-td, th {
-  padding: 0.8rem 0;
-  text-align: center;
-  border-bottom: 0.1rem solid #ddd;
-}
-
+/* Animations */
 @keyframes fade-slide {
   0% {
     opacity: 0;
@@ -384,21 +295,79 @@ td, th {
     opacity: 1;
   }
 }
-
 @keyframes zoomIn {
   from {
-      transform: scale(0);
+    transform: scale(0);
   }
   to {
-      transform: scale(1);
+    transform: scale(1);
   }
 }
-
 @keyframes zoomOut {
   from {
-      transform: scale(1);
+    transform: scale(1);
   }
   to {
-      transform: scale(0);
+    transform: scale(0);
   }
 }
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table td,
+table th {
+  padding: 0.8rem 0;
+  text-align: center;
+  border-bottom: 0.1rem solid #ddd;
+}
+
+/* Grid Columns */
+.col-1 {
+  width: 8.3333333333%;
+}
+
+.col-2 {
+  width: 16.6666666667%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.3333333333%;
+}
+
+.col-5 {
+  width: 41.6666666667%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7 {
+  width: 58.3333333333%;
+}
+
+.col-8 {
+  width: 66.6666666667%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.3333333333%;
+}
+
+.col-11 {
+  width: 91.6666666667%;
+}
+
+.col-12 {
+  width: 100%;
+}/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,376 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+/* Variables */
+$green: green;
+$border-radius-small: 0.5rem;
+$border-radius-large: 1rem;
+$transition-duration: 0.3s;
+$transition-ease: ease;
+$font-size-html: 62.5%;
+$font-size-body: 2.4rem;
+$padding-body: 2rem;
+$margin-auto: 0 auto;
+
+#mini-navbar {
+    .nav-link {
+      color: black;
+      border: transparent ;
+    &.active {
+        color: green;
+         border-color: transparent;
+         border-bottom: 1px solid green;
+      }
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+      transition: 0.3s;
+    }
+    }
+}
+
+// @import "bootstrap/dist/css/bootstrap.min.css";
+@import "/working-u/node_modules/bootstrap/dist/css/bootstrap.css";
+// Import specific stylings from pages
+@import "/working-u/pages/myPage/myPage.css";
+
+// Then add additional custom code here
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Base Styles */
+html {
+  font-size: $font-size-html;
+}
+
+body {
+  font-size: $font-size-body;
+  padding: 0 $padding-body;
+  margin: $margin-auto;
+}
+
+/* Additional customizations */
+
+nav {
+  justify-content: space-between;
+  align-items: center;
+
+  /* position: fixed; */
+  padding: 2rem 0;
+  border-bottom: 1px solid black;
+}
+
+main {
+  gap: 2rem;
+}
+
+#side-bar-1 *,
+#side-bar-2 * {
+  padding: 1.8rem;
+  margin: 0.1rem;
+  border-radius: 1rem;
+}
+
+#side-bar-1 *:hover:not(.active),
+#side-bar-2 *:hover {
+  background-color: #dad9d9;
+  transition: 0.3s;
+}
+
+#side-bar-1 {
+  border-bottom: 0.1rem solid;
+}
+
+#content-section {
+  background-color: #eeeeee;
+  padding: 0 2rem;
+}
+
+#page-title {
+  margin: 2rem 0;
+}
+
+#intro {
+  grid-template-columns: repeat(2, auto);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+}
+
+#dynamic-section-1 {
+  background-color: white;
+  padding: 2rem;
+  margin-top: 2.5rem;
+  border-radius: 1.5rem;
+}
+
+#account-tag {
+  background-color: #d2eed2;
+  margin: 0 2rem;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+}
+
+#expected-birthday p {
+  margin: 1rem;
+}
+
+#modal-btns button {
+  padding: 0.7rem;
+  margin: 0 0.5rem;
+  border: 0.25rem solid green;
+  border-radius: 0.5rem;
+}
+
+#modal-btns button:hover,
+#see-task-list-text:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#modal-1-footer {
+  grid-template-columns: repeat(2, auto);
+}
+
+#give-birth-btn {
+  background-color: green;
+  color: white;
+}
+
+#register-parental-btn,
+#stop-leave-btn,
+#see-task-list-text {
+  color: green;
+  background-color: white;
+}
+
+#see-task-list-text {
+  margin-top: 1rem;
+}
+
+
+
+/* Utility Classes */
+.active {
+  color: lighten($green, 20%);
+}
+
+.active-background {
+  background-color: #e8ffe8;
+}
+
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+
+  &-end {
+    justify-content: flex-end;
+  }
+
+  &-start {
+    justify-content: flex-start;
+  }
+
+  &-center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.float-right {
+  float: right;
+}
+
+.hide {
+  display: none;
+}
+
+/* Typography */
+.required {
+  color: red;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  .tooltiptext {
+    visibility: hidden;
+    width: 25rem;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: $border-radius-small;
+    padding: 0.5rem;
+    position: absolute;
+    top: -3.5rem;
+    left: -21rem;
+    z-index: 1;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 90%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: black transparent transparent transparent;
+    }
+  }
+
+  &:hover .tooltiptext {
+    visibility: visible;
+    animation: fade-slide 0.05s forwards;
+  }
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  padding: 20rem 0 0 0;
+  border-radius: 2rem;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #00000066;
+  opacity: 0; /* Start invisible */
+  transition: opacity $transition-duration $transition-ease;
+
+  &.show {
+    display: block;
+    opacity: 1; /* Fade in */
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 2rem;
+    width: 40%;
+    border-radius: $border-radius-large;
+  }
+
+  .close-modal {
+    color: #aaaaaa;
+    float: right;
+    font-size: 3rem;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+      background-color: #e5e5e5;
+      cursor: pointer;
+      text-decoration: none;
+      transition: $transition-duration;
+    }
+  }
+}
+
+/* Buttons */
+button {
+  padding: 0.7rem;
+  border-radius: $border-radius-small;
+  transition: $transition-duration;
+
+  &.cancel-btn {
+    background-color: #fefefe;
+    border: $green;
+    color: $green;
+
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+
+  &.submit-btn {
+    background-color: $green;
+    border: $green;
+    color: white;
+
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+}
+
+/* Animations */
+@keyframes fade-slide {
+  0% {
+    opacity: 0;
+    transform: translateX(0%) translateY(2rem);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  td,
+  th {
+    padding: 0.8rem 0;
+    text-align: center;
+    border-bottom: 0.1rem solid #ddd;
+  }
+}
+
+/* Grid Columns */
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    width: (100% / 12) * $i;
+  }
+}
+
