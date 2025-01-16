@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MY TASK | WORKING U</title>
+    <link rel="stylesheet" href="../workingU.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ".." to specify correct file path -->
+  </head>
+  <body>
+    <nav id="header" class="flex"></nav>
+    <main class="flex">
+      <div id="side-bar" class="col-2"></div>
+      <div id="content-section" class="col-10">
+        <h1 id="page-title">List of recipient's personal tasks</h1>
+        <div id="intro" class="grid"></div>
+        <div id="completed-task" class="flex space-between">
+          <span>number/number completed</span>
+          <button type="button">+ Add more irregular task</button>
+        </div>
+        <div id="dynamic-section-1">
+          <div id="dynamic-content">
+            <table>
+              <thead id="table-header"></thead>
+              <tbody id="table-content"></tbody>
+            </table>
+            <div id="table-footer" class="float-right"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="myTask.js"></script>
+</html>
