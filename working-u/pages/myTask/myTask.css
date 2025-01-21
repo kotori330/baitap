@@ -1,0 +1,6 @@
+th:hover {
+  cursor: pointer;
+  background-color: #f8f9fa; /* equivalent to Bootstrap's $gray-100 */
+  transition: 0.3s;
+}
+

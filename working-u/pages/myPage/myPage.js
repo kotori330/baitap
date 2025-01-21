@@ -21,7 +21,7 @@ const path = "http://127.0.0.1:5500/working-u";
     await loadComponents("intro", `${path}/root/components/intro.html`);
     await loadComponents(
       "birth-report-modal",
-      `${path}/components/modal1.html`
+      `${path}/root/components/modal1.html`
     );
     await loadComponents(
       "mini-navbar",
@@ -76,7 +76,7 @@ const attachEventListeners = () => {
         //   window.location.href = `${path}/myPage/index.html`;
         //   break;
         case "my-task":
-          window.location.href = `${path}/myTask/index.html`;
+          window.location.href = `${path}/pages/myTask/index.html`;
         default:
           break;
       }
@@ -107,29 +107,27 @@ const attachEventListeners = () => {
     });
   }
 
-  const miniNavbarItems = [
-    basicInfo,
-    wageInfo,
-    familyInfo,
-    parentalLeaveInfo,
-    accountSettings,
-  ];
+  const miniNavbarItems = new Map([
+    ["basicInfo", basicInfo],
+    ["wageInfo", wageInfo],
+    ["familyInfo", familyInfo],
+    ["parentalLeaveInfo", parentalLeaveInfo],
+    ["accountSettings", accountSettings],
+  ]);
 
-  miniNavbarItems.forEach((item, index) => {
-    if (item) {
-      miniNavbarItems[index].addEventListener("click", () => {
-        dynamicContentSection.textContent = "";
-        (async () => {
-          await loadComponents(
-            "dynamic-content",
-            `${path}/pages/myPage/mininavbar/${miniNavbarItems[index]}.html`
-          );
-        })();
-        activeMininavbar(miniNavbarItems[index]);
-      });
-    }
+  miniNavbarItems.forEach(function (value, key) {
+    value.addEventListener("click", () => {
+      dynamicContentSection.textContent = "";
+      (async () => {
+        await loadComponents(
+          "dynamic-content",
+          `${path}/pages/myPage/mininavbar/${key}.html`
+        );
+      })();
+      activeMininavbar(value);
+    });
   });
-  
+
   const activeMininavbar = (tab) => {
     Array.from(miniNavbar.getElementsByClassName("nav-link")).forEach(
       (item) => {
@@ -138,81 +136,8 @@ const attachEventListeners = () => {
     );
     tab.firstElementChild.classList.add("active");
   };
+
+  $(document).ready(() => {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 };
-
-// // For mini Navbar
-// if (basicInfo) {
-//   basicInfo.addEventListener("click", () => {
-//     dynamicContentSection.textContent = "";
-//     (async () => {
-//       await loadComponents(
-//         "dynamic-content",
-//         `${path}/myPage/basicInfo.html`
-//       );
-//     })();
-
-//     activeMininavbar(basicInfo);
-//   });
-// }
-
-// if (wageInfo) {
-//   wageInfo.addEventListener("click", () => {
-//     dynamicContentSection.textContent = "";
-//     (async () => {
-//       await loadComponents("dynamic-content", `${path}/myPage/wageInfo.html`);
-//     })();
-
-//     activeMininavbar(wageInfo);
-//   });
-// }
-
-// if (familyInfo) {
-//   familyInfo.addEventListener("click", () => {
-//     dynamicContentSection.textContent = "";
-//     (async () => {
-//       await loadComponents(
-//         "dynamic-content",
-//         `${path}/myPage/familyInfo.html`
-//       );
-//     })();
-//   });
-// }
-
-// if (parentalLeaveInfo) {
-//   parentalLeaveInfo.addEventListener("click", () => {
-//     dynamicContentSection.textContent = "";
-//     (async () => {
-//       await loadComponents(
-//         "dynamic-content",
-//         `${path}/myPage/parentalLeaveInfo.html`
-//       );
-//     })();
-//   });
-// }
-
-// if (accountSettings) {
-//   accountSettings.addEventListener("click", () => {
-//     dynamicContentSection.textContent = "";
-//     (async () => {
-//       await loadComponents(
-//         "dynamic-content",
-//         `${path}/myPage/accountSettings.html`
-//       );
-//     })();
-//   });
-// }
-
-// miniNavbar.childNodes.forEach((item) => {
-//   if (item.nodeType === 1) {
-//     // Ensure the node is an element
-//     item.addEventListener("click", () => {
-//       miniNavbar.childNodes.forEach((node) => {
-//         if (node.nodeType === 1) {
-//           // Ensure the node is an element
-//           node.classList.remove("active");
-//         }
-//       });
-//       item.classList.add("active");
-//     });
-//   }
-// });
