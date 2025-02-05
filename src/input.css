@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer: CSS Rule to overwrite  */
+/* @apply:  */
+@layer utilities {
+  .section-min-height {
+    min-height: calc(100vh - 68vh);
+  }
+  /* This [&>div] is called arbitrary value, which means child div tag(s) of the .toggle-btn will be applied*/
+  .toggle-btn {
+    @apply [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div::before]:translate-y-0 [&>div::before]:rotate-45 [&>div]:rotate-[180deg] [&>div]:bg-transparent;
+  }
+
+  .inset-shadow {
+    box-shadow:
+      12px 12px 12px rgba(0, 0, 0, 0.1) inset,
+      -10px -10px 10px white inset;
+  }
+
+  .transition-inset-shadow {
+    @apply inset-shadow duration-500 ease-in-out;
+  }
+}
+
+.radial-blue {
+  background: radial-gradient(lightyellow, skyblue);
+}
